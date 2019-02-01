@@ -7,4 +7,11 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  border-radius: 12px;
+}
+
+.button:hover {
+  background-color: #008CBA; /* Blue */
+  color: white;
+  font-weight: bold;
 }
