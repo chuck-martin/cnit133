@@ -36,7 +36,7 @@ function saySomething() {
 		case "gollum":
 			alert(cm_gollum);
 			break;
-		case "gollum":
+		case "aragorn":
 			alert(cm_aragorn);
 			break;
 		default:
