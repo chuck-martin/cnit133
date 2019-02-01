@@ -18,7 +18,7 @@ function initAll() {
 	document.getElementById("aragorn").onclick = saySomething;
 }
 
-// Takes the value of the is of the clicked button and displayes an alert box with a quote value.
+// Takes the value of the clicked button's ID and displayes an alert box with a quote value.
 function saySomething() {
 	switch(this.id) {
 		case "gandalf":
