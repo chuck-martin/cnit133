@@ -6,5 +6,5 @@ January 31, 2019
 
 // Sets the text for the element with ID myMessage
 window.onload = function() {
-  document.getElementById("myMessage").innerHTML = "Hello, San Francisco!";
+  document.getElementById("myMessage").innerHTML = "Hello, San Francisco!!!";
 }
