@@ -32,12 +32,12 @@ td {
 #free, .pickedBG {
 	color: white;
 	background-color: black;
-	background-image: url(one_ring.png);
+	background-image: url(../images/one_ring.png);
 	background-position: center;
  	background-repeat: no-repeat;
  	background-size: cover;
 }
 
 .winningBG {
-	background-image: url(images/redFlash.gif);
+	background-image: url(../images/redFlash.gif);
 }
