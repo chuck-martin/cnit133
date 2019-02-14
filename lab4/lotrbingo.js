@@ -25,28 +25,25 @@ var cm_characters = new Array (
 	"Háma",
 	"Isildur",
 	"Legolas",
+	"Meriadoc Brandybuck",
 	"Mouth of Sauron",
-	"Proactive",
-	"Rails",
-	"Scalable",
-	"Social bookmarks",
-	"Social graph",
-	"Social software",
-	"Spam",
-	"Synergy",
-	"Tagging",
-	"Tipping point",
-	"Truthiness",
-	"User-generated",
-	"Vlog",
-	"Webinar",
-	"Wiki",
-	"Workflow"
+	"Nazgûl",
+	"Peregrin Took",
+	"Saruman",
+	"Sauron",
+	"Shelob",
+	"Théoden",
+	"Théodred",
+	"Tom Bombadil",
+	"Treebeard",
+	"Witch-king of Angmar"
 );
 
-var usedWords = new Array(buzzwords.length);
+var usedWords = new Array(cm_characters.length);
 window.onload = initAll;
 
+
+// This calls the function that draws the initial card--if the browser supports JavaScript
 function initAll() {
 	if (document.getElementById) {
 		document.getElementById("reload").onclick = anotherCard;
@@ -57,27 +54,34 @@ function initAll() {
 	}
 }
 
+// This is just a loop that calls the function to add content to the squares 25 times
 function newCard() {
 	for (var i=0; i<24; i++) {
 		setSquare(i);
 	}
 }
 
+/*
+This function does 3 things:
+- Gets a random value from the Array
+- Checks to see if the value is unique
+- Puts the unique value in the next square, clears the class, sets a listener
+*/
 function setSquare(thisSquare) {
 	do {
-		var randomWord = Math.floor(Math.random() * buzzwords.length);
+		var randomWord = Math.floor(Math.random() * cm_characters.length);
 	}
 	while (usedWords[randomWord]);
 
 	usedWords[randomWord] = true;
 	var currSquare = "square" + thisSquare;
-	document.getElementById(currSquare).innerHTML = buzzwords[randomWord];
+	document.getElementById(currSquare).innerHTML = cm_characters[randomWord];
 	document.getElementById(currSquare).className = "";
 	document.getElementById(currSquare).onmousedown = toggleColor;
 }
 
 function anotherCard() {
-	for (var i=0; i<buzzwords.length; i++) {
+	for (var i=0; i<cm_characters.length; i++) {
 		usedWords[i] = false;
 	}
 
@@ -85,7 +89,9 @@ function anotherCard() {
 	return false;
 }
 
+// Toggles the current square's background, also checks if the toggled square ceates a winner
 function toggleColor(evt) {
+	// I really don't want to do this; I want to assume no one uses old IE
 	if (evt) {
 		var thisSquare = evt.target;
 	}
@@ -101,6 +107,7 @@ function toggleColor(evt) {
 	checkWin();
 }
 
+// This is where all the magic happens
 function checkWin() {
 	var winningOption = -1;
 	var setSquares = 0;
