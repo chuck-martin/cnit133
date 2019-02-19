@@ -1,7 +1,15 @@
+/*
+Chuck Martin
+CNIT 133, Lab 4
+Lord of the Rings Bingo
+This is adapted from the buzzword bingo app
+*/
+
 // This is an array containing Lord of the Rings character names.
 var cm_characters = new Array (
 	"Aragorn",
 	"Arwen",
+	"Barliman Butterbur",
 	"Bilbo Baggins",
 	"Boromir",
 	"Celeborn",
@@ -15,6 +23,7 @@ var cm_characters = new Array (
 	"Farmer Maggott",
 	"Frodo Baggins",
 	"Galadriel",
+	"Gamling",
 	"Gandalf",
 	"Gimli",
 	"Glorfindel",
@@ -29,6 +38,8 @@ var cm_characters = new Array (
 	"Mouth of Sauron",
 	"Nazgûl",
 	"Peregrin Took",
+	"Radagast",
+	"Samwise Gamgee",
 	"Saruman",
 	"Sauron",
 	"Shelob",
@@ -39,19 +50,26 @@ var cm_characters = new Array (
 	"Witch-king of Angmar"
 );
 
+// An empty array the length of the characters array used to track the ones used
 var usedWords = new Array(cm_characters.length);
+
+// Once the page loads, this calls the main method
 window.onload = initAll;
 
 
 // This calls the function that draws the initial card--if the browser supports JavaScript
 function initAll() {
-	if (document.getElementById) {
+	// I'm assuming modern browser, so no conditional
+	// if (document.getElementById) {
+		// Set an event handler on the object with the ID "reload"
 		document.getElementById("reload").onclick = anotherCard;
+		// Call the function to create a card
 		newCard();
-	}
+	/*}
 	else {
 		alert("Sorry, your browser doesn't support this script");
 	}
+	*/
 }
 
 // This is just a loop that calls the function to add content to the squares 25 times
@@ -80,6 +98,7 @@ function setSquare(thisSquare) {
 	document.getElementById(currSquare).onmousedown = toggleColor;
 }
 
+// Clears the usedWords array, then creates a new card
 function anotherCard() {
 	for (var i=0; i<cm_characters.length; i++) {
 		usedWords[i] = false;
