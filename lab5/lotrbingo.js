@@ -70,6 +70,9 @@ function initAll() {
 		alert("Sorry, your browser doesn't support this script");
 	}
 	*/
+
+	// call the functin to load the ads.
+	cm_choosePic()
 }
 
 // This is just a loop that calls the function to add content to the squares 25 times

@@ -39,8 +39,8 @@ td {
 }
 
 .winningBG {
-	/* background-image: url(../images/redFlash.gif); */
-	animation: fade 3s alternate infinite;
+	background-image: url(../images/redFlash.gif);
+	/* animation: fade 3s alternate infinite; */
 }
 
 .centered {
@@ -50,4 +50,20 @@ td {
 #adBanner {
 	width: 400px;
 	height: 75px;
+	text-align: center;
+}
+
+#vAdBanner {
+	width: 150px;
+	height: 800px;
+	float: right;
+	text-align: center;
+}
+
+.noborder{
+	border: none;
+}
+
+.right {
+	float: right;
 }
