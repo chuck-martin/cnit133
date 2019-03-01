@@ -51,6 +51,7 @@ td {
 	width: 400px;
 	height: 75px;
 	text-align: center;
+	border: 1px solid purple;
 }
 
 #vAdBanner {
@@ -58,6 +59,7 @@ td {
 	height: 800px;
 	float: right;
 	text-align: center;
+	border: 1px solid purple;
 }
 
 .noborder{
