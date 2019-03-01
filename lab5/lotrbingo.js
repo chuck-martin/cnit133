@@ -77,6 +77,7 @@ function initAll() {
 
 	// call the functin to load the ads
 	cm_choosePic();
+	cm_chooseVerticalPic();
 }
 
 // This is just a loop that calls the function to add content to the squares 25 times

@@ -16,9 +16,13 @@ function cm_choosePic() {
 	// theAd = Math.floor(Math.random() * adImages.length);
 	// Changing this to assemble the ad to display.
 	document.getElementById("adBanner").src = "images/banner" + pickImageNumber() + ".gif";
-	document.getElementById("vAdBanner").src = "images/vbanner" + pickVerticalImageNumber() + ".jpg";
 
 	cm_rotate();
+}
+
+function cm_chooseVerticalPic() {
+	document.getElementById("vAdBanner").src = "images/vbanner" + pickVerticalImageNumber() + ".jpg";
+
 	cm_verticalRotate();
 }
 
