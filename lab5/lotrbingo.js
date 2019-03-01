@@ -71,8 +71,8 @@ function initAll() {
 	}
 	*/
 	// Put initial images in ad divs.
-	document.getElementById("adBanner").src = "images/banner2.gif";
-	document.getElementById("vAdBanner").src = "images/vbanner1.jpg";
+	// document.getElementById("adBanner").src = "images/banner2.gif";
+	// document.getElementById("vAdBanner").src = "images/vbanner1.jpg";
 
 
 	// call the functin to load the ads
