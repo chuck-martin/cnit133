@@ -70,8 +70,12 @@ function initAll() {
 		alert("Sorry, your browser doesn't support this script");
 	}
 	*/
+	// Put initial images in ad divs.
+	document.getElementById("adBanner").src = "images/banner1.gif";
+	document.getElementById("vAdBanner").src = "images/vbanner1.jpg";
 
-	// call the functin to load the ads.
+
+	// call the functin to load the ads
 	cm_choosePic();
 }
 
