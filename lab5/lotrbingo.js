@@ -54,11 +54,11 @@ var cm_characters = new Array (
 var usedWords = new Array(cm_characters.length);
 
 // Once the page loads, this calls the main method
-window.onload = initAll;
+// window.onload = initAll;
 
 
 // This calls the function that draws the initial card--if the browser supports JavaScript
-function initAll() {
+function cm_drawCard() {
 	// I'm assuming modern browser, so no conditional
 	// if (document.getElementById) {
 		// Set an event handler on the object with the ID "reload"
@@ -74,10 +74,6 @@ function initAll() {
 	// document.getElementById("adBanner").src = "images/banner2.gif";
 	// document.getElementById("vAdBanner").src = "images/vbanner1.jpg";
 
-
-	// call the functin to load the ads
-	cm_choosePic();
-	cm_chooseVerticalPic();
 }
 
 // This is just a loop that calls the function to add content to the squares 25 times
