@@ -35,13 +35,13 @@ function cm_rotate() {
 	// document.getElementById("adBanner").src = adImages[theAd];
 	document.getElementById("adBanner").src = "images/banner" + pickImageNumber() + ".gif";
 
-	setTimeout(cm_rotate, displayTime() * 1000);
+	window.setTimeout(cm_rotate, displayTime() * 1000);
 }
 
 function cm_verticalRotate() {
 	document.getElementById("vAdBanner").src = "images/vbanner" + pickVerticalImageNumber() + ".jpg";
 
-	setTimeout(cm_verticalRotate, displayTimeVertical() * 1000);
+	window.setTimeout(cm_verticalRotate, displayTimeVertical() * 1000);
 }
 
 // Picks a random number for the images
