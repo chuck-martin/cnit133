@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2 class="centered">Car Picker</h2>
-<form action="someAction.cgi">
+<form>
 	<p><label for="emailAddr">Email Address: <input id="emailAddr" type="text" size="50" class="reqd email"></label></p>
 	<p>Colors:
 		<select id="color" class="reqd">
@@ -40,6 +40,7 @@
 			<option value="California--Los Alamitos">California--Los Alamitos</option>
 			<option value="California--Los Angeles">California--Los Angeles</option>
 		</select>
+		<div class="invalid" id="ziperror"></div>
 	</p>
 	<p><input type="submit" value="Submit">&nbsp;<input type="reset"></p>
 </form>

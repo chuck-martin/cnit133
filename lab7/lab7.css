@@ -13,6 +13,11 @@ label.invalid {
 	font-weight: bold;
 }
 
+div.invalid {
+	color: #F00;
+	font-size: small;
+}
+
 select {
 	margin-left: 80px;
 }

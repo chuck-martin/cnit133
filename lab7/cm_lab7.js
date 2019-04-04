@@ -27,6 +27,10 @@ function initForm() {
 
 function validForm() {
   alert("Form submitted!");
+
+	// Verify zip/dealerList
+	verifyZipDealer();
+
 }
 
 function validateField() {
@@ -41,11 +45,24 @@ function validateField() {
 			break;
 		case "zip":
 			if (!isZip(this.value)) {
-				this.className += " invalid"
+				this.className += " invalid";
+				document.getElementById("ziperror").innerHTML = "ZIP must have 5 numbers.";
+			}
+			else {
+				this.className = removeInvalidClass(this.className);
+				document.getElementById("ziperror").innerHTML = "";
 			}
 			break;
 		case "dealerList":
-			alert(this.id);
+		if (document.getElementById("dealerList").selectedIndex == -1) {
+			this.className += " invalid";
+			document.getElementById("ziperror").innerHTML = "A dealer must be selected.";
+		}
+		else {
+			this.className = removeInvalidClass(this.className);
+			document.getElementById("ziperror").innerHTML = "";
+		}
+		break;
 	}
 }
 
@@ -78,4 +95,25 @@ function isNum(passedVal) {
     }
   }
   return true;
+}
+
+// Takes a strings of classes and removes "invalid" and returns the rest
+function removeInvalidClass(classes) {
+	var newClasses = "";
+	var oldClasses = classes.split(" ");
+	for (i=0; i < oldClasses.length; i++) {
+		if (oldClasses[i].toLowerCase() != "invalid") {
+			newClasses = newClasses + " " + oldClasses[i];
+		}
+	}
+	return newClasses;
+}
+
+function verifyZipDealer() {
+	if (document.getElementById("zip").value == "" && document.getElementById("dealerList").selectedIndex == -1) {
+		document.getElementById("zip").className += " invalid";
+		document.getElementById("dealerList").className += " invalid";
+		document.getElementById("ziperror").innerHTML = "Either a ZIP must be entered or a dealer must be selected.";
+		window.setTimeout(alert("They were empty"), 2000);
+	}
 }
