@@ -36,7 +36,18 @@ function validForm() {
 function validateField() {
 	switch(this.id) {
 		case "emailAddr":
+			break;
 		case "color":
+			if (this.selectedIndex == 0) {
+				this.className += " invalid";
+				alert(this.className);
+				window.setTimeout(alert("No color selected!"), 2000);
+			}
+			else {
+				alert("Color selected.");
+				removeInvalidClass(this.className);
+			}
+			break;
 		case "sunroof":
 		case "pWindows":
 		case "twoDoor":
@@ -63,6 +74,18 @@ function validateField() {
 			document.getElementById("ziperror").innerHTML = "";
 		}
 		break;
+	}
+}
+
+function isColorPicked (colorpicker) {
+	if (colorpicker.selectedIndex == 0) {
+		colorpicker.className += " invalid";
+		alert(colorpicker.className);
+		window.setTimeout(alert("No color selected!"), 2000);
+	}
+	else {
+		alert("Color selected.");
+		removeInvalidClass(colorpicker.className);
 	}
 }
 
