@@ -1,0 +1,57 @@
+body {
+	background-color: #FFF;
+}
+
+iframe#dealercard1 {
+	float: right;
+	border: 1px solid black;
+	width: 100px;
+	height: 150px;
+	margin-top: 100px;
+	margin-left: 50px;
+}
+
+iframe#dealercard2 {
+	float: right;
+	border: 1px solid black;
+	width: 100px;
+	height: 150px;
+	margin-top: 100px;
+	margin-left: 200px;
+}
+
+iframe#dealercard3 {
+	float: right;
+	border: 1px solid black;
+	width: 100px;
+	height: 150px;
+	margin-top: 100px;
+	margin-left: 350px;
+}
+
+iframe#dealercard4 {
+	float: right;
+	border: 1px solid black;
+	width: 100px;
+	height: 150px;
+	margin-top: 100px;
+	margin-left: 500px;
+}
+
+iframe#dealercard5 {
+	float: right;
+	border: 1px solid black;
+	width: 100px;
+	height: 150px;
+	margin-top: 100px;
+	margin-left: 650px;
+}
+
+iframe#dealercard6 {
+	float: right;
+	border: 1px solid black;
+	width: 100px;
+	height: 150px;
+	margin-top: 100px;
+	margin-left: 800px;
+}

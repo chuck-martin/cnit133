@@ -1,57 +1,14 @@
 // The card arrays
 
-var cards = ["images/cards/AC.png",
-"images/cards/2C.png",
-"images/cards/3C.png",
-"images/cards/4C.png",
-"images/cards/5C.png",
-"images/cards/6C.png",
-"images/cards/7C.png",
-"images/cards/8C.png",
-"images/cards/9C.png",
-"images/cards/10C.png",
-"images/cards/JC.png",
-"images/cards/QC.png",
-"images/cards/KC.png",
-"images/cards/AD.png",
-"images/cards/2D.png",
-"images/cards/3D.png",
-"images/cards/4D.png",
-"images/cards/5D.png",
-"images/cards/6D.png",
-"images/cards/7D.png",
-"images/cards/8D.png",
-"images/cards/9D.png",
-"images/cards/10D.png",
-"images/cards/JD.png",
-"images/cards/QD.png",
-"images/cards/KD.png",
-"images/cards/AH.png",
-"images/cards/2H.png",
-"images/cards/3H.png",
-"images/cards/4H.png",
-"images/cards/5H.png",
-"images/cards/6H.png",
-"images/cards/7H.png",
-"images/cards/8H.png",
-"images/cards/9H.png",
-"images/cards/10H.png",
-"images/cards/JH.png",
-"images/cards/QH.png",
-"images/cards/KH.png",
-"images/cards/AS.png",
-"images/cards/2S.png",
-"images/cards/3S.png",
-"images/cards/4S.png",
-"images/cards/5S.png",
-"images/cards/6S.png",
-"images/cards/7S.png",
-"images/cards/8S.png",
-"images/cards/9S.png",
-"images/cards/10S.png",
-"images/cards/JS.png",
-"images/cards/QS.png",
-"images/cards/KS.png"]
+var cardPath = "images/cards/";
+var cards = ["AC.png", "2C.png", "3C.png", "4C.png", "5C.png", "6C.png",
+"7C.png", "8C.png", "9C.png", "TC.png", "JC.png", "QC.png", "KC.png",
+"AD.png", "2D.png", "3D.png", "4D.png", "5D.png", "6D.png",
+"7D.png", "8D.png", "9D.png", "TD.png", "JD.png", "QD.png", "KD.png",
+"AH.png", "2H.png", "3H.png", "4H.png", "5H.png", "6H.png",
+"7H.png", "8H.png", "9H.png", "TH.png", "JH.png", "QH.png", "KH.png",
+"AS.png", "2S.png", "3S.png", "4S.png", "5S.png", "6S.png",
+"7S.png", "8S.png", "9S.png", "TS.png", "JS.png", "QS.png", "KS.png"]
 
 var usedCards = new Array(52);
 var drawnCards = 0;
@@ -61,15 +18,29 @@ function getRandomUnusedCard() {
     alert("No more cards in deck.");
     return;
   }
-  var getCard = Math.floor(Math.random() * 52)
+  var getCard = Math.floor(Math.random() * cards.length)
   if (usedCards[getCard] == "drawn") {
     getRandomUnusedCard();
   }
   else {
     usedCards[getCard] = "drawn";
     drawnCards ++;
-    document.getElementById("card").src = cards[getCard];
+    document.getElementById("card").src = cardPath + cards[getCard];
     document.getElementById("cardsused").innerHTML = drawnCards;
     // return cards[getCard];
+  }
+}
+
+function dealCard() {
+  var getCard = Math.floor(Math.random() * cards.length)
+  if (usedCards[getCard] == "drawn") {
+    getRandomUnusedCard();
+  }
+  else {
+    usedCards[getCard] = "drawn";
+    drawnCards ++;
+    var cardCode = "<img src='" + cardPath + cards[getCard] + "' width='100px'>";
+    var cardNumber = "dealercard" + drawnCards;
+    document.getElementById(cardNumber).contentWindow.document.body.innerHTML = cardCode;
   }
 }
