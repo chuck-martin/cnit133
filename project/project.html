@@ -2,17 +2,30 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
-	<title>Cat Moods</title>
+	<title>Blackjack</title>
 	<link rel="stylesheet" href="../cnit133.css">
 	<link rel="stylesheet" href="project.css">
 	<script src="cards.js"></script>
+	<script src="blackjack.js"></script>
 </head>
 <body>
-	<h1>Random Cards</h1>
+	<h1>Blackjack</h1>
 
 	<!-- <p><img src="" id="card" width="200px"></p>
 	<p>Cards used: <span id="cardsused"></span></p> -->
-	<p><input type="button" value="New Card" onclick="dealCard()">
-
+	<p><img class="deck" src="images/cards/blue_back.png">
+		<img class="drawnCard" id="drawnCard" src="">
+		<input type="button" class="deal" value="New Card" onclick="dealCard()">
+		<input type="button" class="reset" value="New Hand" onclick="clearCards()">
+	<img id="dcard1" class="dcard1" src="">
+	<img id="dcard2" class="dcard2" src="">
+	<img id="dcard3" class="dcard3" src="">
+	<img id="dcard4" class="dcard4" src="">
+	<img id="dcard5" class="dcard5" src="">
+	<img id="pcard1" class="pcard1" src="">
+	<img id="pcard2" class="pcard2" src="">
+	<img id="pcard3" class="pcard3" src="">
+	<img id="pcard4" class="pcard4" src="">
+	<img id="pcard5" class="pcard5" src="">
 </body>
 </html>
