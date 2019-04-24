@@ -9,7 +9,10 @@ var cards = ["AC.png", "2C.png", "3C.png", "4C.png", "5C.png", "6C.png",
 "7H.png", "8H.png", "9H.png", "TH.png", "JH.png", "QH.png", "KH.png",
 "AS.png", "2S.png", "3S.png", "4S.png", "5S.png", "6S.png",
 "7S.png", "8S.png", "9S.png", "TS.png", "JS.png", "QS.png", "KS.png"]
+var usedCards = new Array(52);
+var drawnCards = 0;
 
+/*
 window.onload = clearCards;
 
 function clearCards() {
@@ -23,19 +26,18 @@ function clearCards() {
   dCards.length = 0;
   pCards.length = 0;
 }
+*/
 
-var usedCards = new Array(52);
-var dCards = new Array;
-var pCards = new Array;
-var drawnCards = 0;
-var turn = "player";
 
+// Gets a random card from a deck of cards
+// Sets a drawn card to "drawn" in a parallel array so it cannot be drawn again
 function getRandomUnusedCard() {
+  var getCard;
   if (drawnCards == 52) {
     alert("No more cards in deck.");
     return;
   }
-  var getCard = Math.floor(Math.random() * cards.length)
+  getCard = Math.floor(Math.random() * cards.length)
   if (usedCards[getCard] == "drawn") {
     getRandomUnusedCard();
   }
@@ -48,6 +50,7 @@ function getRandomUnusedCard() {
   }
 }
 
+/*
 function dealCard() {
   var getCard = Math.floor(Math.random() * cards.length)
   if (usedCards[getCard] == "drawn") {
@@ -80,3 +83,4 @@ function dealCard() {
     // document.getElementById(cardNumber).contentWindow.document.body.innerHTML = cardCode;
   }
 }
+*/
