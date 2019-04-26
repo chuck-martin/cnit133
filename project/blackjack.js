@@ -33,32 +33,6 @@ class BlackjackHand {
   // When a card is dealt, updates the total for that hands
   // There can be more than one total if a hand contains one or more aces
   updateHandTotal() {
-
-    // var testCard;
-    /*
-    // loop through the cards
-    for (var i=0; i < this.hand.length; i++) {
-      // reset the hand total to 0 so we can count the hand total at the moment
-      this.handTotal = 0;
-      // Get the first character, which is the card rank
-      testCard = this.hand[i].charAt(0);
-      alert(testCard);
-      // number card
-      if (testCard == "2" || "3" || "4" || "5" || "6" || "7" || "8" || "9") {
-        this.handTotal += parseInt(testCard);
-        alert(turn + ": " + this.handTotal);
-        // face card
-      } else if (testCard == "T" || "J" || "Q" || "K") {
-        this.handTotal = this.handTotal + 10;
-        alert(turn + ": " + this.handTotal);
-      } else {
-        // It's an ace
-        this.handTotal += 1;
-        this.aceInHand = true;
-      }
-    }
-    */
-    alert(this.hand[this.hand.length - 1].charAt(0));
     switch(this.hand[this.hand.length - 1].charAt(0)) {
       // number cards
       case "2":
@@ -83,7 +57,6 @@ class BlackjackHand {
         this.handTotal += 1;
         this.aceInHand = true;
     }
-    // alert(this.hand, + ", " + this.handTotal);
   }
 
 
@@ -111,14 +84,12 @@ function dealCard() {
   if (turn == "player") {
     // Add the card to the player hand array
     player.hand.push(dealtCard);
-    alert("Time to update the player hand total!");
     player.updateHandTotal();
     document.getElementById("playerheader").innerHTML = player.handTotal.toString();
     turn = "dealer";
   } else {
     // Add the card to the dealer hand array
     dealer.hand.push(dealtCard);
-    alert("Time to update the dealer hand total!");
     dealer.updateHandTotal();
     document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
     turn = "player";
