@@ -31,8 +31,8 @@ class DeckOfCards {
     // is the card still there?
     while (this.deck[getCard] == "") {
       // Nope, draw again
-       // this.getRandomUnusedCard();
-       var getCard = Math.floor(Math.random() * this.deck.length);
+      // this.getRandomUnusedCard();
+      getCard = Math.floor(Math.random() * this.deck.length);
     }
     // else {
       // card is still in the deck
