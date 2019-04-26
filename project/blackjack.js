@@ -85,13 +85,21 @@ function dealCard() {
     // Add the card to the player hand array
     player.hand.push(dealtCard);
     player.updateHandTotal();
-    document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+    if (player.aceInHand) {
+      document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
+    } else {
+      document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+    }
     turn = "dealer";
   } else {
     // Add the card to the dealer hand array
     dealer.hand.push(dealtCard);
     dealer.updateHandTotal();
-    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+    if (dealer.aceInHand) {
+      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
+    } else {
+      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+    }    
     turn = "player";
   }
   // Update the card display on the page
