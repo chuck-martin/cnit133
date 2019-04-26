@@ -63,3 +63,10 @@ body {
 .player img, .dealer img {
 	width: 100px;
 }
+
+.playerbuttons, div.playerbuttons {
+	position: fixed;
+	top: 750px;
+	left: 50px;
+	height: 50px;
+}

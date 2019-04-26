@@ -12,6 +12,7 @@ window.onload = newGame;
 var turn = "player";
 var player;
 var dealer;
+var gameDeck;
 
 
 // Class for blackjack hands
@@ -63,6 +64,7 @@ class BlackjackHand {
 
 
 }
+
 function newGame() {
   // create player & dealer instances 
   gameDeck = new DeckOfCards;
@@ -70,13 +72,42 @@ function newGame() {
   dealer = new BlackjackHand;
   document.getElementById("dealer").innerHTML = "";
   document.getElementById("player").innerHTML = "";
-  // drawnCards = 0;
-  // usedCards = new Array(52);
+  initialDeal();
 }
 
+// Deal 4 cards, 2 each
+function initialDeal() {
+  for (var i = 0; i < 4; i++) {
+    var dealtCard = gameDeck.getRandomUnusedCard();
+  
+  // add the card to a hand
+  if (turn == "player") {
+    // Add the card to the player hand array
+    player.hand.push(dealtCard);
+    player.updateHandTotal();
+    if (player.aceInHand) {
+      document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
+    } else {
+      document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+    }
+    turn = "dealer";
+  } else {
+    // Add the card to the dealer hand array
+    dealer.hand.push(dealtCard);
+    dealer.updateHandTotal();
+    if (dealer.aceInHand) {
+      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
+    } else {
+      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+    }    
+    turn = "player";
+  }
+  // Update the card display on the page
+  displayCards();
+  }
+}
 
-
-// This deals a card to the appropriate spot
+// This deals a single card to the appropriate spot
 function dealCard() {
   var dealtCard = gameDeck.getRandomUnusedCard();
   
@@ -106,6 +137,35 @@ function dealCard() {
   displayCards();
 }
 
+function dealPlayerCard() {
+  // Add the card to the player hand array
+  player.hand.push(gameDeck.getRandomUnusedCard());
+  player.updateHandTotal();
+  if (player.aceInHand) {
+    document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
+  } else {
+    document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+  }
+  displayCards();
+}
+
+function dealDealerCards() {
+  while (dealer.handTotal <= 17) {
+    sleep(500);
+    // Add the card to the player hand array
+    dealer.hand.push(gameDeck.getRandomUnusedCard());
+    dealer.updateHandTotal();
+    if (dealer.aceInHand) {
+      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
+    } else {
+      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+    }
+  displayCards();
+  }
+  
+}
+
+
 // lays out all the dealt cards on the page
 function displayCards() {
   // dealer cards
@@ -123,4 +183,13 @@ function displayCards() {
   }
   document.getElementById("player").style.width = (i * 100) + "px";
   document.getElementById("player").innerHTML = cardHTML;
+}
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
