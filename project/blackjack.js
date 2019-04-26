@@ -30,27 +30,58 @@ class BlackjackHand {
       this.sameCardRank = sameCardRank;
     }
 
-// When a card is dealt, updates the total for that hands
-// There can be more than one total if a hand contains one or more aces
+  // When a card is dealt, updates the total for that hands
+  // There can be more than one total if a hand contains one or more aces
   updateHandTotal() {
-    var testCard = "";
+
+    // var testCard;
+    /*
     // loop through the cards
     for (var i=0; i < this.hand.length; i++) {
+      // reset the hand total to 0 so we can count the hand total at the moment
+      this.handTotal = 0;
       // Get the first character, which is the card rank
-      testCard += this.hand[i].charAt(0);
+      testCard = this.hand[i].charAt(0);
       alert(testCard);
       // number card
       if (testCard == "2" || "3" || "4" || "5" || "6" || "7" || "8" || "9") {
         this.handTotal += parseInt(testCard);
+        alert(turn + ": " + this.handTotal);
         // face card
       } else if (testCard == "T" || "J" || "Q" || "K") {
-        this.handTotal += 10;
-        alert(this.handTotal);
+        this.handTotal = this.handTotal + 10;
+        alert(turn + ": " + this.handTotal);
       } else {
         // It's an ace
         this.handTotal += 1;
         this.aceInHand = true;
       }
+    }
+    */
+    alert(this.hand[this.hand.length - 1].charAt(0));
+    switch(this.hand[this.hand.length - 1].charAt(0)) {
+      // number cards
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+        this.handTotal += parseInt(this.hand[hand.length - 1].charAt(0));
+        break;
+      // 10 and face cards
+      case "T":
+      case "J":
+      case "Q":
+      case "K":
+        this.handTotal += 10;
+        break;
+      // Its an ace!
+      default:
+        this.handTotal += 1;
+        this.aceInHand = true;
     }
     // alert(this.hand, + ", " + this.handTotal);
   }
@@ -75,27 +106,24 @@ function newGame() {
 // This deals a card to the appropriate spot
 function dealCard() {
   var dealtCard = gameDeck.getRandomUnusedCard();
-  // alert(dealtCard);
-  // test if card is dealt already
-  /*
-  while (gameDeck.usedCards[dealtCard] == "drawn") {
-    dealtCard = gameDeck.getRandomUnusedCard();
+  
+  // add the card to a hand
+  if (turn == "player") {
+    // Add the card to the player hand array
+    player.hand.push(dealtCard);
+    alert("Time to update the player hand total!");
+    player.updateHandTotal();
+    document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+    turn = "dealer";
+  } else {
+    // Add the card to the dealer hand array
+    dealer.hand.push(dealtCard);
+    alert("Time to update the dealer hand total!");
+    dealer.updateHandTotal();
+    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+    turn = "player";
   }
-*/
-  
-    // add the card to a hand
-    if (turn == "player") {
-      player.hand.push(dealtCard);
-      // player.updateHandTotal();
-      // document.getElementById("playerheader").innerHTML = player.handTotal.toString();
-      turn = "dealer";
-    } else {
-      dealer.hand.push(dealtCard);
-      // dealer.updateHandTotal();
-      // document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
-      turn = "player";
-    }
-  
+  // Update the card display on the page
   displayCards();
 }
 
