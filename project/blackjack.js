@@ -69,7 +69,7 @@ class BlackjackHand {
       case "7":
       case "8":
       case "9":
-        this.handTotal += parseInt(this.hand[hand.length - 1].charAt(0));
+        this.handTotal += parseInt(this.hand[this.hand.length - 1].charAt(0));
         break;
       // 10 and face cards
       case "T":
