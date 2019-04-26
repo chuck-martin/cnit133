@@ -30,97 +30,31 @@ body {
 	height: 150px;
 }
 
-.dcard1 {
+.dealerheader {
 	position: fixed;
 	top: 250px;
 	left: 50px;
-	width: 100px;
-	height: 150px;
-}
-
-.dcard2 {
-	position: fixed;
-	top: 250px;
-	left: 200px;
-	width: 100px;
-	height: 150px;
-}
-
-.dcard3 {
-	position: fixed;
-	top: 250px;
-	left: 350px;
-	width: 100px;
-	height: 150px;
-}
-
-.dcard4 {
-	position: fixed;
-	top: 250px;
-	left: 500px;
-	width: 100px;
-	height: 150px;
-}
-
-.dcard5 {
-	position: fixed;
-	top: 250px;
-	left: 650px;
-	width: 100px;
-	height: 150px;
-}
-
-.pcard1 {
-	position: fixed;
-	top: 450px;
-	left: 50px;
-	width: 100px;
-	height: 150px;
-}
-
-.pcard2 {
-	position: fixed;
-	top: 450px;
-	left: 200px;
-	width: 100px;
-	height: 150px;
-}
-
-.pcard3 {
-	position: fixed;
-	top: 450px;
-	left: 350px;
-	width: 100px;
-	height: 150px;
-}
-
-.pcard4 {
-	position: fixed;
-	top: 450px;
-	left: 500px;
-	width: 100px;
-	height: 150px;
-}
-
-.pcard5 {
-	position: fixed;
-	top: 450px;
-	left: 650px;
-	width: 100px;
-	height: 150px;
+	height: 50px;
 }
 
 .dealer {
 	position: fixed;
-	top: 250px;
+	top: 300px;
 	left: 50px;
 	height: 150px;
 	width: 100px;
 }
 
+.playerheader {
+	position: fixed;
+	top: 500px;
+	left: 50px;
+	height: 50px;
+}
+
 .player {
 	position: fixed;
-	top: 450px;
+	top: 550px;
 	left: 50px;
 	height: 150px;
 	width: 100px;
