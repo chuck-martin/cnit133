@@ -185,6 +185,7 @@ function displayCards() {
   document.getElementById("player").innerHTML = cardHTML;
 }
 
+// This is a little funciton I found to add a wait to JavaScript
 function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
