@@ -13,6 +13,8 @@ var turn = "player";
 var player;
 var dealer;
 var gameDeck;
+var cardBack;
+var newDeal = true;
 
 
 // Class for blackjack hands
@@ -70,6 +72,8 @@ function newGame() {
   gameDeck = new DeckOfCards;
   player = new BlackjackHand;
   dealer = new BlackjackHand;
+  cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
+  document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("dealer").innerHTML = "";
   document.getElementById("player").innerHTML = "";
   initialDeal();
@@ -150,6 +154,8 @@ function dealPlayerCard() {
 }
 
 function dealDealerCards() {
+  newDeal = false;
+  displayCards();
   while (dealer.handTotal <= 17) {
     sleep(500);
     // Add the card to the player hand array
@@ -169,13 +175,22 @@ function dealDealerCards() {
 // lays out all the dealt cards on the page
 function displayCards() {
   // dealer cards
-  var cardHTML = "";
-  for (var i = 0; i < dealer.hand.length; i++) {
-    cardHTML += "<img src='" + gameDeck.cardPath + dealer.hand[i] + "'>";
+  if (newDeal) {
+    var cardHTML = "";
+    cardHTML += "<img src='" + gameDeck.cardPath + cardBack + "'>";
+    for (var i = 1; i < dealer.hand.length; i++) {
+      cardHTML += "<img src='" + gameDeck.cardPath + dealer.hand[i] + "'>";
+    }
+    document.getElementById("dealer").style.width = (i * 100) + "px";
+    document.getElementById("dealer").innerHTML = cardHTML;
+  } else {
+    var cardHTML = "";
+    for (var i = 0; i < dealer.hand.length; i++) {
+      cardHTML += "<img src='" + gameDeck.cardPath + dealer.hand[i] + "'>";
+    }
+    document.getElementById("dealer").style.width = (i * 100) + "px";
+    document.getElementById("dealer").innerHTML = cardHTML;
   }
-  document.getElementById("dealer").style.width = (i * 100) + "px";
-  document.getElementById("dealer").innerHTML = cardHTML;
-
   // player cards
   var cardHTML = "";
   for (var i = 0; i < player.hand.length; i++) {

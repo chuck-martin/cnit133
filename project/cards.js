@@ -11,11 +11,14 @@ class DeckOfCards {
     "AS.png", "2S.png", "3S.png", "4S.png", "5S.png", "6S.png",
     "7S.png", "8S.png", "9S.png", "TS.png", "JS.png", "QS.png", "KS.png"),
     usedCards = new Array(52),
+    cardBacks = new Array("blue_back.png", "gray_back.png", "green_back.png",
+    "purple_back.png", "red_back.png", "yellow_back.png"),
     drawnCards = 0,
     cardPath = "images/cards/")
     {
       this.deck = deck;
       this.usedCards = usedCards;
+      this.cardBacks = cardBacks;
       this.drawnCards = drawnCards;
       this.cardPath = cardPath;
     }
