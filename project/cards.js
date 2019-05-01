@@ -28,13 +28,13 @@ class DeckOfCards {
   getRandomUnusedCard() {
     var getCard = Math.floor(Math.random() * this.deck.length);
     // is the card still there?
-    while (this.usedCards[getCard] == "") {
+    while (this.usedCards[getCard] == "drawn") {
       // Nope, draw again
       getCard = Math.floor(Math.random() * this.deck.length);
     }
     // card is still in the deck
     var card = this.deck[getCard];
-    this.usedCards[getCard] = "";
+    this.usedCards[getCard] = "drawn";
     return card;
   }
 
