@@ -99,16 +99,12 @@ function initialDeal() {
     // Add the card to the dealer hand array
     dealer.hand.push(dealtCard);
     dealer.updateHandTotal();
-    if (dealer.aceInHand) {
-      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
-    } else {
-      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
-    }    
     turn = "player";
   }
   // Update the card display on the page
   displayCards();
   }
+  alert(dealer.handTotal);
 }
 
 // This deals a single card to the appropriate spot
@@ -130,11 +126,18 @@ function dealCard() {
     // Add the card to the dealer hand array
     dealer.hand.push(dealtCard);
     dealer.updateHandTotal();
-    if (dealer.aceInHand) {
-      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
+    // Display nothing for dealer hend total when new hand is dealt
+    if (newDeal) {
+      alert("New deal!");
+      document.getElementById("dealerheader").innerHTML = "";
     } else {
-      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
-    }    
+      // No longer a newly dealt hand, display dealer hand total
+      if (dealer.aceInHand) {
+        document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
+      } else {
+        document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+      }
+    }       
     turn = "player";
   }
   // Update the card display on the page
@@ -157,7 +160,6 @@ function dealDealerCards() {
   newDeal = false;
   displayCards();
   while (dealer.handTotal <= 17) {
-    sleep(500);
     // Add the card to the player hand array
     dealer.hand.push(gameDeck.getRandomUnusedCard());
     dealer.updateHandTotal();
@@ -167,6 +169,7 @@ function dealDealerCards() {
       document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
     }
   displayCards();
+  sleep(500);
   }
   
 }
@@ -181,6 +184,7 @@ function displayCards() {
     for (var i = 1; i < dealer.hand.length; i++) {
       cardHTML += "<img src='" + gameDeck.cardPath + dealer.hand[i] + "'>";
     }
+    document.getElementById("dealerheader").innerHTML = "";
     document.getElementById("dealer").style.width = (i * 100) + "px";
     document.getElementById("dealer").innerHTML = cardHTML;
   } else {
