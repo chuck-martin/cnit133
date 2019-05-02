@@ -105,6 +105,18 @@ function initialDeal() {
   displayCards();
   }
   alert(dealer.handTotal);
+  // Test for blackjacks
+  // If player gets blackjack, player wins, game over, start new game
+  if (isBlackJack(player)) {
+    alert("You win!");
+    sleep(500);
+    newGame();
+    // Player doesn't have blackjack, but if dealer gets blackjack, dealer wins, game over, start new game
+  } else if (isBlackJack(dealer)) {
+    alert("Dealer wins!");
+    sleep(500);
+    newGame();
+  }
 }
 
 // This deals a single card to the appropriate spot
@@ -211,5 +223,14 @@ function sleep(milliseconds) {
     if ((new Date().getTime() - start) > milliseconds){
       break;
     }
+  }
+}
+
+// Tests if a 2-card hand is blackjack, that is, totals 11 (which is also 21 with 2 cards)
+function isBlackJack(testhand) {
+  if (testhand.hand.length == 2 && testhand.handTotal == 11) {
+    return true;
+  } else {
+    return false;
   }
 }
