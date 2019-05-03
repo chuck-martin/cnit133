@@ -15,7 +15,8 @@ var dealer;
 var gameDeck;
 var cardBack;
 var newDeal = true;
-var playerdollars = 1000;
+var playerDollars = 1000;
+var betAmount;
 
 
 
@@ -69,13 +70,16 @@ class BlackjackHand {
 
 function newGame() {
   // Get bet amount
-  var howmuch = window.prompt("How much money would you like to bet? (Enter 0 to " + playerdollars + ")");
-  if (parseInt(howmuch) == NaN) {
-    howmuch = window.prompt("No number entered\nHow much money would you like to bet? (Enter 0 to " + playerdollars + ")");
-  } else if (parseInt(howmuch) < 0 || parseInt(howmuch) > playerdollars) {
-      howmuch = window.prompt("Invalid amount entered\nHow much money would you like to bet? (Enter 0 to " + playerdollars + ")");
+  betAmount = window.prompt("How much money would you like to bet? (Enter 1 to " + playerDollars + ")");
+  if (parseInt(betAmount) == NaN) {
+    betAmount = window.prompt("No number entered\nHow much money would you like to bet? (Enter 1 to " + playerDollars + ")");
+  } else if (parseInt(betAmount) < 0 || parseInt(betAmount) > playerDollars) {
+      betAmount = window.prompt("Invalid amount entered\nHow much money would you like to bet? (Enter 1 to " + playerDollars + ")");
+  } else  if (parseInt(betAmount) == 0) {
+      alert("Thanks for playing!");
+      return;
   } else {
-      playerdollars -= parseInt(howmuch);
+      playerDollars -= parseInt(betAmount);
   }
   
   // create player & dealer instances 
@@ -89,7 +93,7 @@ function newGame() {
   document.getElementById("dealerheader").style.visibility = "hidden";
   document.getElementById("player").innerHTML = "";
   document.getElementById("player").style.width = "0px";
-  document.getElementById("playermoney").innerHTML = "$" + playerdollars.toString();
+  document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
   initialDeal();
 }
 
@@ -113,16 +117,20 @@ function initialDeal() {
   // If player gets blackjack, player wins, game over, start new game
   if (isBlackJack(player)) {
     alert("You win!");
+    playerDollars += betAmount * 2.5;
+    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
     sleep(500);
     newGame();
     // Player doesn't have blackjack, but if dealer gets blackjack, dealer wins, game over, start new game
   } else if (isBlackJack(dealer)) {
     alert("Dealer wins!");
+    playerDollars -= betAmount;
+    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
     sleep(500);
     newGame();
   }
 
-  insurance();
+  // insurance();
 }
 
 function dealPlayerCard() {
@@ -139,6 +147,10 @@ function dealPlayerCard() {
   // Update the display of player cards
   document.getElementById("player").style.width = (player.hand.length * 100) + "px";
   document.getElementById("player").innerHTML += player.cards[player.cards.length - 1];
+  if (player.handTotal > 21) {
+    alert("Dealer wins!");
+    // No need to update player amount; it was already taken when it was bet
+  }
 }
 
 function dealDealerCard() {
@@ -197,7 +209,20 @@ function insurance() {
   }
 }
 
-
+function declareWinner() {
+  if (player.handTotal > dealer.handTotal) {
+    alert("Player wins!");
+    playerDollars += betAmount * 2;
+    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+  } else if (dealer.handTotal > player.handTotal) {
+    alert("Dealer wins!");
+    // No need to update player amount; it was already taken when it was bet
+  } else {
+    alert("Push!");
+    playerDollars += betAmount;
+    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+  }
+}
 
 
 // Old code, not used
