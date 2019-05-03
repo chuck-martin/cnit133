@@ -15,6 +15,8 @@ var dealer;
 var gameDeck;
 var cardBack;
 var newDeal = true;
+var playerdollars = 1000;
+
 
 
 // Class for blackjack hands
@@ -66,6 +68,16 @@ class BlackjackHand {
 }
 
 function newGame() {
+  // Get bet amount
+  var howmuch = window.prompt("How much money would you like to bet? (Enter 0 to " + playerdollars + ")");
+  if (parseInt(howmuch) == NaN) {
+    howmuch = window.prompt("No number entered\nHow much money would you like to bet? (Enter 0 to " + playerdollars + ")");
+  } else if (parseInt(howmuch) < 0 || parseInt(howmuch) > playerdollars) {
+      howmuch = window.prompt("Invalid amount entered\nHow much money would you like to bet? (Enter 0 to " + playerdollars + ")");
+  } else {
+      playerdollars -= parseInt(howmuch);
+  }
+  
   // create player & dealer instances 
   gameDeck = new DeckOfCards;
   player = new BlackjackHand;
@@ -77,6 +89,7 @@ function newGame() {
   document.getElementById("dealerheader").style.visibility = "hidden";
   document.getElementById("player").innerHTML = "";
   document.getElementById("player").style.width = "0px";
+  document.getElementById("playermoney").innerHTML = "$" + playerdollars.toString();
   initialDeal();
 }
 
@@ -92,6 +105,10 @@ function initialDeal() {
     }
   }
 
+  if (dealer.hand[1].charAt(0) == "A") {
+    dealer.dealerShowsAce = true;
+  }
+
   // Test for blackjacks
   // If player gets blackjack, player wins, game over, start new game
   if (isBlackJack(player)) {
@@ -104,6 +121,8 @@ function initialDeal() {
     sleep(500);
     newGame();
   }
+
+  insurance();
 }
 
 function dealPlayerCard() {
@@ -168,7 +187,15 @@ function isBlackJack(testhand) {
   }
 }
 
-
+function insurance() {
+  if (dealer.dealerShowsAce) {
+    if (confirm("Do you want insurance?")) {
+      alert("yes");
+    } else {
+      alert("no");
+    }
+  }
+}
 
 
 
