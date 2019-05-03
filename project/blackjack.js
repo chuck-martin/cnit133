@@ -21,12 +21,14 @@ var newDeal = true;
 class BlackjackHand {
   constructor(
     hand = new Array(),
+    cards = new Array(),
     handTotal =  0,
     aceInHand = false,
     dealerShowsAce = false,
     sameCardRank = false)
     {
       this.hand = hand;
+      this.cards = cards;
       this.handTotal = handTotal;
       this.aceInHand = aceInHand;
       this.dealerShowsAce = dealerShowsAce;
@@ -61,10 +63,6 @@ class BlackjackHand {
         this.aceInHand = true;
     }
   }
-
-
-
-
 }
 
 function newGame() {
@@ -75,36 +73,25 @@ function newGame() {
   cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("dealer").innerHTML = "";
+  document.getElementById("dealer").style.width = "0px";
+  document.getElementById("dealerheader").style.visibility = "hidden";
   document.getElementById("player").innerHTML = "";
+  document.getElementById("player").style.width = "0px";
   initialDeal();
 }
 
 // Deal 4 cards, 2 each
 function initialDeal() {
   for (var i = 0; i < 4; i++) {
-    var dealtCard = gameDeck.getRandomUnusedCard();
-  
-  // add the card to a hand
-  if (turn == "player") {
-    // Add the card to the player hand array
-    player.hand.push(dealtCard);
-    player.updateHandTotal();
-    if (player.aceInHand) {
-      document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
+    if (turn == "player") {
+      dealPlayerCard();
+      turn = "dealer";
     } else {
-      document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+      dealDealerCard();
+      turn = "player";
     }
-    turn = "dealer";
-  } else {
-    // Add the card to the dealer hand array
-    dealer.hand.push(dealtCard);
-    dealer.updateHandTotal();
-    turn = "player";
   }
-  // Update the card display on the page
-  displayCards();
-  }
-  alert(dealer.handTotal);
+
   // Test for blackjacks
   // If player gets blackjack, player wins, game over, start new game
   if (isBlackJack(player)) {
@@ -118,6 +105,75 @@ function initialDeal() {
     newGame();
   }
 }
+
+function dealPlayerCard() {
+  // Add the card to the player hand array
+  player.hand.push(gameDeck.getRandomUnusedCard());
+  // add the HTML necesary to display the card to the cards array
+  player.cards.push("<img src='" + gameDeck.cardPath + player.hand[player.hand.length - 1] + "'>")
+  player.updateHandTotal();
+  if (player.aceInHand) {
+    document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
+  } else {
+    document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+  }
+  // Update the display of player cards
+  document.getElementById("player").style.width = (player.hand.length * 100) + "px";
+  document.getElementById("player").innerHTML += player.cards[player.cards.length - 1];
+}
+
+function dealDealerCard() {
+  // Add the card to the dealer hand array
+  dealer.hand.push(gameDeck.getRandomUnusedCard());
+  // add the HTML necesary to display the card to the cards array
+  dealer.cards.push("<img src='" + gameDeck.cardPath + dealer.hand[dealer.hand.length - 1] + "'>")
+  dealer.updateHandTotal();
+  if (dealer.aceInHand) {
+    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
+  } else {
+    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+  }
+  // Update the display of dealer cards
+  document.getElementById("dealer").style.width = (dealer.hand.length * 100) + "px";
+  document.getElementById("dealer").innerHTML += dealer.cards[dealer.cards.length - 1];
+}
+
+
+function dealDealerCards() {
+  newDeal = false;
+  document.getElementById("dealerheader").style.visibility = "visible";
+  while (dealer.handTotal <= 17) {
+    sleep(500);
+    dealDealerCard();
+  }
+}
+
+
+// This is a little funciton I found to add a wait to JavaScript
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+// Tests if a 2-card hand is blackjack, that is, totals 11 with an ace (which is also 21 with 2 cards)
+function isBlackJack(testhand) {
+  if (testhand.hand.length == 2 && testhand.handTotal == 11 & testhand.aceInHand) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+
+
+
+
+// Old code, not used
 
 // This deals a single card to the appropriate spot
 function dealCard() {
@@ -156,36 +212,6 @@ function dealCard() {
   displayCards();
 }
 
-function dealPlayerCard() {
-  // Add the card to the player hand array
-  player.hand.push(gameDeck.getRandomUnusedCard());
-  player.updateHandTotal();
-  if (player.aceInHand) {
-    document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
-  } else {
-    document.getElementById("playerheader").innerHTML = player.handTotal.toString();
-  }
-  displayCards();
-}
-
-function dealDealerCards() {
-  newDeal = false;
-  displayCards();
-  while (dealer.handTotal <= 17) {
-    // Add the card to the player hand array
-    dealer.hand.push(gameDeck.getRandomUnusedCard());
-    dealer.updateHandTotal();
-    if (dealer.aceInHand) {
-      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
-    } else {
-      document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
-    }
-  displayCards();
-  sleep(500);
-  }
-  
-}
-
 
 // lays out all the dealt cards on the page
 function displayCards() {
@@ -214,23 +240,4 @@ function displayCards() {
   }
   document.getElementById("player").style.width = (i * 100) + "px";
   document.getElementById("player").innerHTML = cardHTML;
-}
-
-// This is a little funciton I found to add a wait to JavaScript
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
-
-// Tests if a 2-card hand is blackjack, that is, totals 11 (which is also 21 with 2 cards)
-function isBlackJack(testhand) {
-  if (testhand.hand.length == 2 && testhand.handTotal == 11) {
-    return true;
-  } else {
-    return false;
-  }
 }

@@ -17,10 +17,14 @@
 		<!-- <img class="drawnCard" id="drawnCard" src=""> 
 		<input type="button" class="deal" value="New Card" onclick="dealCard()"> -->
 		<input type="button" class="reset" value="New Hand" onclick="newGame()">
+		
+		
 	</p>
-	<div class="dealerheader">Dealer: <span id="dealerheader"></span></div>
+	<div class="dealerheader">Dealer: <span id="dealerheader"></span><br>
+		<input type="button" value="Dealer Card" onclick="dealDealerCard()"></div>
 	<div id="dealer" class="dealer"></div>
 	<div class="playerheader">Player: <span id="playerheader"></span><br>
+		<input type="button" value="Player Card" onclick="dealPlayerCard()"><br>
 		<input type="button" value="Hit me!" onclick="dealPlayerCard()"><br>
 		<input type="button" value="Stand" onclick="dealDealerCards()">
 		</div>
