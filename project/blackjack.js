@@ -70,6 +70,7 @@ class BlackjackHand {
 
 function newGame() {
   // Get bet amount
+  /*
   betAmount = window.prompt("How much money would you like to bet? (Enter 1 to " + playerDollars + ")");
   if (parseInt(betAmount) == NaN) {
     betAmount = window.prompt("No number entered\nHow much money would you like to bet? (Enter 1 to " + playerDollars + ")");
@@ -81,7 +82,7 @@ function newGame() {
   } else {
       playerDollars -= parseInt(betAmount);
   }
-  
+  */
   // create player & dealer instances 
   gameDeck = new DeckOfCards;
   player = new BlackjackHand;
@@ -119,15 +120,13 @@ function initialDeal() {
     alert("You win!");
     playerDollars += betAmount * 2.5;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
-    sleep(500);
-    newGame();
+    showAllDealerCards();
     // Player doesn't have blackjack, but if dealer gets blackjack, dealer wins, game over, start new game
   } else if (isBlackJack(dealer)) {
+    showAllDealerCards();
     alert("Dealer wins!");
     playerDollars -= betAmount;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
-    sleep(500);
-    newGame();
   }
 
   // insurance();
@@ -137,7 +136,7 @@ function dealPlayerCard() {
   // Add the card to the player hand array
   player.hand.push(gameDeck.getRandomUnusedCard());
   // add the HTML necesary to display the card to the cards array
-  player.cards.push("<img src='" + gameDeck.cardPath + player.hand[player.hand.length - 1] + "'>")
+  player.cards.push("<img src='" + gameDeck.cardPath + player.hand[player.hand.length - 1] + "'>");
   player.updateHandTotal();
   if (player.aceInHand) {
     document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
@@ -157,7 +156,11 @@ function dealDealerCard() {
   // Add the card to the dealer hand array
   dealer.hand.push(gameDeck.getRandomUnusedCard());
   // add the HTML necesary to display the card to the cards array
-  dealer.cards.push("<img src='" + gameDeck.cardPath + dealer.hand[dealer.hand.length - 1] + "'>")
+  if (dealer.hand.length == 1) {
+    dealer.cards.push("<img src='" + gameDeck.cardPath + cardBack + "'>");
+  } else {
+    dealer.cards.push("<img src='" + gameDeck.cardPath + dealer.hand[dealer.hand.length - 1] + "'>");
+  }
   dealer.updateHandTotal();
   if (dealer.aceInHand) {
     document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
@@ -165,20 +168,39 @@ function dealDealerCard() {
     document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
   }
   // Update the display of dealer cards
-  document.getElementById("dealer").style.width = (dealer.hand.length * 100) + "px";
-  document.getElementById("dealer").innerHTML += dealer.cards[dealer.cards.length - 1];
+  if (dealer.cards.length < 3) {
+    // On the initial deal, deel the first card as a card back
+    document.getElementById("dealer").style.width = (dealer.hand.length * 100) + "px";
+    document.getElementById("dealer").innerHTML += dealer.cards[dealer.cards.length - 1];
+  } else {
+    showAllDealerCards();
+  }
+  
 }
 
 
 function dealDealerCards() {
   newDeal = false;
   document.getElementById("dealerheader").style.visibility = "visible";
-  while (dealer.handTotal <= 17) {
-    sleep(500);
-    dealDealerCard();
+  if (dealer.handTotal >= 17) {
+    showAllDealerCards();
+  } else {
+    while (dealer.handTotal < 17) {
+      sleep(500);
+      dealDealerCard();
+    }
   }
 }
 
+function showAllDealerCards() {
+  dealer.cards[0] = "<img src='" + gameDeck.cardPath + dealer.hand[0] + "'>";
+  document.getElementById("dealer").style.width = (dealer.hand.length * 100) + "px";
+  var tempHTML = "";
+  for (var i = 0; i < dealer.cards.length; i++) {
+    tempHTML += dealer.cards[i];
+  }
+  document.getElementById("dealer").innerHTML = tempHTML;
+}
 
 // This is a little funciton I found to add a wait to JavaScript
 function sleep(milliseconds) {
@@ -214,6 +236,7 @@ function declareWinner() {
     alert("Player wins!");
     playerDollars += betAmount * 2;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+    showAllDealerCards();
   } else if (dealer.handTotal > player.handTotal) {
     alert("Dealer wins!");
     // No need to update player amount; it was already taken when it was bet
@@ -221,6 +244,7 @@ function declareWinner() {
     alert("Push!");
     playerDollars += betAmount;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+    showAllDealerCards();
   }
 }
 

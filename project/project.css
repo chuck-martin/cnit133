@@ -22,6 +22,65 @@ body {
 	height: 150px;
 }
 
+.playermoneytext {
+	position: fixed;
+	top: 80px;
+	left: 200px;
+	height: 30px;
+	width: 200px;
+	border: 0.5px solid #DDD;
+	text-align: right;
+	vertical-align: bottom;
+	line-height: 1.8;
+	font-size: 100%;
+}
+
+.playermoney {
+	position: fixed;
+	top: 80px;
+	left: 425px;
+	height: 30px;
+	width: 120px;
+	border: 0.5px solid #DDD;
+	text-align: right;
+	font-size: 150%;
+}
+
+.playerbetamounttext {
+	position: fixed;
+	top: 150px;
+	left: 200px;
+	height: 30px;
+	width: 200px;
+	border: 0.5px solid #DDD;
+	text-align: right;
+	vertical-align: bottom;
+	line-height: 1.8;
+	font-size: 100%;
+}
+
+.playerbetamount {
+	position: fixed;
+	top: 150px;
+	left: 425px;
+	height: 30px;
+	width: 120px;
+	border: 0.5px solid #DDD;
+	text-align: right;
+	font-size: 100%;
+}
+
+.playerbetbutton {
+	position: fixed;
+	top: 150px;
+	left: 600px;
+	height: 30px;
+	width: 300px;
+	border: 0.5px solid #DDD;
+	text-align: center;
+	font-size: 120%;
+}
+
 .drawnCard {
 	position: fixed;
 	top: 50px;
@@ -54,16 +113,7 @@ body {
 	width: 150px;
 }
 
-.playermoney {
-	position: fixed;
-	top: 570px;
-	left: 50px;
-	height: 30px;
-	width: 120px;
-	border: 0.5px solid #DDD;
-	text-align: right;
-	font-size: 150%;
-}
+
 
 .player {
 	position: fixed;

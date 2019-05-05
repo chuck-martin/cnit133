@@ -10,13 +10,19 @@
 </head>
 <body>
 	<h1>Blackjack</h1>
+	<img class="deck" id="deck" src="">
+	<div class="playermoneytext">Bankroll: </div>
+	<div id="playermoney" class="playermoney"></div>
+	<div class="playerbetamounttext">Enter a bet amount: </div>
+	<input class="playerbetamount" type="number" id="betamount">
+	<input class="playerbetbutton" type="button" class="reset" value="Place bet and deal new hand" onclick="newGame()">
 
 	<!-- <p><img src="" id="card" width="200px"></p>
 	<p>Cards used: <span id="cardsused"></span></p> -->
-	<p><img class="deck" id="deck" src="">
+	<p>
 		<!-- <img class="drawnCard" id="drawnCard" src=""> 
 		<input type="button" class="deal" value="New Card" onclick="dealCard()"> -->
-		<input type="button" class="reset" value="New Hand" onclick="newGame()">
+		
 		
 		
 	</p>
@@ -26,7 +32,7 @@
 		<input type="button" value="Hit me!" onclick="dealPlayerCard()"><br>
 		<input type="button" value="Stand" onclick="dealDealerCards()">
 		</div>
-	<div id="playermoney" class="playermoney"></div>
+
 	<div id="player" class="player"></div>
 
 
