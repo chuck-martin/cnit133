@@ -5,7 +5,7 @@ Spring 2019 */
 
 // This is the code for a blackjack game
 
-window.onload = newGame;
+window.onload = startGame;
 
 
 // Set up initial variables
@@ -68,6 +68,10 @@ class BlackjackHand {
   }
 }
 
+function startGame() {
+  document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+}
+
 function newGame() {
   // Get bet amount
   /*
@@ -125,8 +129,8 @@ function initialDeal() {
   } else if (isBlackJack(dealer)) {
     showAllDealerCards();
     alert("Dealer wins!");
-    playerDollars -= betAmount;
-    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+    // playerDollars -= betAmount;
+    // document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
   }
 
   // insurance();
@@ -180,6 +184,11 @@ function dealDealerCard() {
 
 
 function dealDealerCards() {
+  // If player has ace, calculate correct hand total
+  if (player.aceInHand && player.handTotal < 11) {
+      player.handTotal += 10;
+  }
+  document.getElementById("playerheader").innerHTML = (player.handTotal).toString();
   newDeal = false;
   document.getElementById("dealerheader").style.visibility = "visible";
   if (dealer.handTotal >= 17) {
@@ -190,6 +199,12 @@ function dealDealerCards() {
       dealDealerCard();
     }
   }
+  // If dealer has ace, calculate correct hand total
+  if (dealer.aceInHand && dealer.handTotal < 11) {
+    dealer.handTotal += 10;
+  }
+  document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
+  declareWinner();
 }
 
 function showAllDealerCards() {
