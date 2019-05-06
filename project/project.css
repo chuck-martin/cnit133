@@ -1,5 +1,9 @@
 body {
-	background-color: #FFF;
+	background-color: #0A0;
+}
+
+h1 {
+	color: white;
 }
 
 .deal {
@@ -28,11 +32,12 @@ body {
 	left: 200px;
 	height: 30px;
 	width: 200px;
-	border: 0.5px solid #DDD;
+	border: 0.5px solid #060;
 	text-align: right;
 	vertical-align: bottom;
 	line-height: 1.8;
 	font-size: 100%;
+	color: white;
 }
 
 .playermoney {
@@ -41,44 +46,56 @@ body {
 	left: 425px;
 	height: 30px;
 	width: 120px;
-	border: 0.5px solid #DDD;
+	border: 0.5px solid #060;
 	text-align: right;
 	font-size: 150%;
+	background-color: white;
 }
 
 .playerbetamounttext {
 	position: fixed;
-	top: 150px;
+	top: 120px;
 	left: 200px;
 	height: 30px;
 	width: 200px;
-	border: 0.5px solid #DDD;
+	border: 0.5px solid #060;
 	text-align: right;
 	vertical-align: bottom;
 	line-height: 1.8;
 	font-size: 100%;
+	color: white;
 }
 
 .playerbetamount {
 	position: fixed;
-	top: 150px;
+	top: 120px;
 	left: 425px;
 	height: 30px;
 	width: 120px;
-	border: 0.5px solid #DDD;
+	border: 0.5px solid #060;
 	text-align: right;
 	font-size: 100%;
 }
 
 .playerbetbutton {
 	position: fixed;
-	top: 150px;
+	top: 120px;
 	left: 600px;
 	height: 30px;
 	width: 300px;
-	border: 0.5px solid #DDD;
+	border: 0.5px solid #060;
 	text-align: center;
 	font-size: 120%;
+}
+
+.rules {
+	position: fixed;
+	top: 50px;
+	left: 920px;
+	width: 320px;
+	height: 100px;
+	color: #060;
+	background-color: white;
 }
 
 .drawnCard {
@@ -91,15 +108,16 @@ body {
 
 .dealerheader {
 	position: fixed;
-	top: 250px;
+	top: 220px;
 	left: 50px;
 	height: 150px;
 	width: 150px;
+	color: white;
 }
 
 .dealer {
 	position: fixed;
-	top: 250px;
+	top: 220px;
 	left: 250px;
 	height: 150px;
 	width: 100px;
@@ -107,23 +125,24 @@ body {
 
 .playerheader {
 	position: fixed;
-	top: 450px;
+	top: 400px;
 	left: 50px;
 	height: 100px;
 	width: 150px;
+	color: white;
 }
 
 
 
 .player {
 	position: fixed;
-	top: 450px;
+	top: 400px;
 	left: 250px;
 	height: 150px;
 	width: 100px;
 }
 
-.player img, .dealer img {
+.player img, .dealer img, .secondhand img {
 	width: 100px;
 }
 
@@ -132,4 +151,29 @@ body {
 	top: 750px;
 	left: 50px;
 	height: 50px;
+}
+
+.doubledownbutton {
+	visibility: hidden;
+}
+
+.splitpairbutton {
+	visibility: hidden;
+}
+
+.secondhand {
+	position: fixed;
+	top: 570px;
+	left: 250px;
+	height: 150px;
+	width: 100px;
+}
+
+.secondhandheader {
+	position: fixed;
+	top: 570px;
+	left: 50px;
+	height: 100px;
+	width: 150px;
+	color: white;
 }

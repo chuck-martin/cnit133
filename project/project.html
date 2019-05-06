@@ -16,6 +16,12 @@
 	<div class="playerbetamounttext">Enter a bet amount: </div>
 	<input class="playerbetamount" type="number" id="betamount">
 	<input class="playerbetbutton" type="button" class="reset" value="Place bet and deal new hand" onclick="newGame()">
+	<div class="rules">
+		<ul>
+			<li>Dealer stands on soft 17</li>
+			<li>Player can double down on 10 or 11 only</li>
+		</ul>
+	</div>
 
 	<!-- <p><img src="" id="card" width="200px"></p>
 	<p>Cards used: <span id="cardsused"></span></p> -->
@@ -30,11 +36,13 @@
 	<div id="dealer" class="dealer"></div>
 	<div class="playerheader">Player: <span id="playerheader"></span><br>
 		<input type="button" value="Hit me!" onclick="dealPlayerCard()"><br>
-		<input type="button" value="Stand" onclick="dealDealerCards()">
-		</div>
+		<input type="button" value="Stand" onclick="dealDealerCards()"><br>
+		<input type="button" class="doubledownbutton" id="doubledownbutton" value="Double down" onclick="doubleDown()">
+		<input type="button" class="splitpairbutton" id="splitpairbutton" value="Split pair">
+	</div>
 
 	<div id="player" class="player"></div>
-
+	<div id="secondhand" class="secondhand"></div>
 
 </body>
 </html>

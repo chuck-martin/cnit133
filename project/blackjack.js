@@ -70,23 +70,24 @@ class BlackjackHand {
 
 function startGame() {
   document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+  document.getElementById("betamount").value = 0;
 }
 
 function newGame() {
   // Get bet amount
-  /*
-  betAmount = window.prompt("How much money would you like to bet? (Enter 1 to " + playerDollars + ")");
+  betAmount = document.getElementById("betamount");
   if (parseInt(betAmount) == NaN) {
-    betAmount = window.prompt("No number entered\nHow much money would you like to bet? (Enter 1 to " + playerDollars + ")");
+    betAmount = alert("No number entered.");
   } else if (parseInt(betAmount) < 0 || parseInt(betAmount) > playerDollars) {
-      betAmount = window.prompt("Invalid amount entered\nHow much money would you like to bet? (Enter 1 to " + playerDollars + ")");
+      betAmount = alert("Invalid amount entered");
   } else  if (parseInt(betAmount) == 0) {
       alert("Thanks for playing!");
       return;
   } else {
       playerDollars -= parseInt(betAmount);
+      document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
   }
-  */
+  
   // create player & dealer instances 
   gameDeck = new DeckOfCards;
   player = new BlackjackHand;
@@ -104,6 +105,7 @@ function newGame() {
 
 // Deal 4 cards, 2 each
 function initialDeal() {
+  document.getElementById("doubledownbutton").style.visibility = "hidden";
   for (var i = 0; i < 4; i++) {
     if (turn == "player") {
       dealPlayerCard();
@@ -133,6 +135,11 @@ function initialDeal() {
     // document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
   }
 
+  // Test for player eligible to double down
+  if (player.handTotal == 10 || player.handTotal == 11) {
+    document.getElementById("doubledownbutton").style.visibility = "visible";
+  }
+
   // insurance();
 }
 
@@ -151,8 +158,9 @@ function dealPlayerCard() {
   document.getElementById("player").style.width = (player.hand.length * 100) + "px";
   document.getElementById("player").innerHTML += player.cards[player.cards.length - 1];
   if (player.handTotal > 21) {
+    showAllDealerCards();
     alert("Dealer wins!");
-    // No need to update player amount; it was already taken when it was bet
+    // No need to update player money; it was already taken when it was bet
   }
 }
 
@@ -246,13 +254,24 @@ function insurance() {
   }
 }
 
+// Can double down when player total is 10 or 11
+function doubleDown() {
+  // double bet amount
+  playerDollars -= player.betAmount;
+  document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+  player.betAmount += player.betAmount;
+  // deal 1 player card, then deal dealer cards
+  dealPlayerCard();
+  dealDealerCards();
+}
+
 function declareWinner() {
-  if (player.handTotal > dealer.handTotal) {
+  if (player.handTotal > dealer.handTotal && player.handTotal <= 21) {
     alert("Player wins!");
     playerDollars += betAmount * 2;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
     showAllDealerCards();
-  } else if (dealer.handTotal > player.handTotal) {
+  } else if (dealer.handTotal > player.handTotal && dealer.handTotal <= 21) {
     alert("Dealer wins!");
     // No need to update player amount; it was already taken when it was bet
   } else {
