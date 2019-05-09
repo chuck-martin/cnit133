@@ -26,6 +26,16 @@ h1 {
 	height: 150px;
 }
 
+.cardcount {
+	position: fixed;
+	top: 170px;
+	left: 200px;
+	height: 25px;
+	width: 25px;
+	text-align: center;
+	background-color: white;
+}
+
 .playermoneytext {
 	position: fixed;
 	top: 80px;

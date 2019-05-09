@@ -69,9 +69,12 @@ class BlackjackHand {
 }
 
 function startGame() {
-  document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   document.getElementById("betamount").value = betAmount;
   document.getElementById("winner").innerHTML = "";
+  gameDeck = new DeckOfCards;
+  cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
+  document.getElementById("cardcount").innerHTML = 52;
 }
 
 function newGame() {
@@ -88,13 +91,14 @@ function newGame() {
     return;
   } else {
       playerDollars -= parseInt(betAmount);
-      document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+      document.getElementById("playermoney").innerHTML = "$" + playerDollars;
       document.getElementById("winner").innerHTML = "";
   }
   // If more than 30 cards used, create a fresh deck
   if (gameDeck.drawnCards > 30) {
     gameDeck = new DeckOfCards;
     cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
+    document.getElementById("cardcount").innerHTML = 52;
   }
   // create player & dealer instances 
   player = new BlackjackHand;
@@ -105,7 +109,7 @@ function newGame() {
   document.getElementById("dealerheader").style.visibility = "hidden";
   document.getElementById("player").innerHTML = "";
   document.getElementById("player").style.width = "0px";
-  document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   initialDeal();
 }
 
@@ -133,7 +137,7 @@ function initialDeal() {
     document.getElementById("winner").innerHTML = "Blackjack! You win!";
     // alert("You win!");
     playerDollars += betAmount * 2.5;
-    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+    document.getElementById("playermoney").innerHTML = "$" + playerDollars;
     showAllDealerCards();
     return null;
     // Player doesn't have blackjack, but if dealer gets blackjack, dealer wins, game over, start new game
@@ -158,6 +162,7 @@ function dealPlayerCard() {
   // Add the card to the player hand array
   player.hand.push(gameDeck.getRandomUnusedCard());
   gameDeck.drawnCards++;
+  document.getElementById("cardcount").innerHTML = 52 - gameDeck.drawnCards;
   // add the HTML necesary to display the card to the cards array
   player.cards.push("<img src='" + gameDeck.cardPath + player.hand[player.hand.length - 1] + "'>");
   player.updateHandTotal();
@@ -183,6 +188,7 @@ function dealDealerCard() {
   // Add the card to the dealer hand array
   dealer.hand.push(gameDeck.getRandomUnusedCard());
   gameDeck.drawnCards++;
+  document.getElementById("cardcount").innerHTML = 52 - gameDeck.drawnCards;
   // add the HTML necesary to display the card to the cards array
   if (dealer.hand.length == 1) {
     dealer.cards.push("<img src='" + gameDeck.cardPath + cardBack + "'>");
@@ -291,8 +297,8 @@ function insurance() {
 // Can double down when player total is 10 or 11
 function doubleDown() {
   // double bet amount
-  playerDollars = parseInt(playerDollars) - player.betAmount;
-  document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+  playerDollars -= player.betAmount;
+  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   player.betAmount += player.betAmount;
   // deal 1 player card, then deal dealer cards
   dealPlayerCard();
@@ -302,8 +308,8 @@ function doubleDown() {
 function declareWinner() {
   if (((player.handTotal > dealer.handTotal) && player.handTotal <= 21) || dealer.handTotal > 21) {
     document.getElementById("winner").innerHTML = "You win!";
-    playerDollars = parseInt(playerDollars) + betAmount * 2;
-    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+    playerDollars +=  betAmount * 2;
+    document.getElementById("playermoney").innerHTML = "$" + playerDollars;
     showAllDealerCards();
   } else if ((dealer.handTotal > player.handTotal) && dealer.handTotal <= 21) {
     document.getElementById("winner").innerHTML = "Dealer wins!";
@@ -311,8 +317,8 @@ function declareWinner() {
   } else {
     // alert("Push!");
     document.getElementById("winner").innerHTML = "Push!";
-    playerDollars = parseInt(playerDollars) + betAmount;
-    document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
+    playerDollars += betAmount;
+    document.getElementById("playermoney").innerHTML = "$" + playerDollars;
     showAllDealerCards();
   }
 }
