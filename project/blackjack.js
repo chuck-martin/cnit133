@@ -231,7 +231,7 @@ function dealDealerCards() {
   document.getElementById("dealerheader").style.visibility = "visible";
   showAllDealerCards();
   while (!stopDealing()) {
-    sleep(500);
+    // sleep(500);
     dealDealerCard();
   }
   // If soft 17 to 21, make hand total correct

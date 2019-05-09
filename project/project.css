@@ -34,6 +34,8 @@ h1 {
 	width: 25px;
 	text-align: center;
 	background-color: white;
+	line-height: 1.5;
+	border-radius: 10px;
 }
 
 .playermoneytext {
@@ -48,6 +50,7 @@ h1 {
 	line-height: 1.8;
 	font-size: 100%;
 	color: white;
+	border-radius: 5px;
 }
 
 .playermoney {
@@ -60,6 +63,8 @@ h1 {
 	text-align: right;
 	font-size: 150%;
 	background-color: white;
+	border-radius: 5px;
+	padding-right: 5px;
 }
 
 .playerbetamounttext {
@@ -74,6 +79,7 @@ h1 {
 	line-height: 1.8;
 	font-size: 100%;
 	color: white;
+	border-radius: 5px;
 }
 
 .playerbetamount {
@@ -85,6 +91,8 @@ h1 {
 	border: 0.5px solid #060;
 	text-align: right;
 	font-size: 110%;
+	border-radius: 5px;
+	padding-right: 5px;
 }
 
 .playerbetbutton {
@@ -96,6 +104,7 @@ h1 {
 	border: 0.5px solid #060;
 	text-align: center;
 	font-size: 120%;
+	border-radius: 5px;
 }
 
 .rules {
@@ -105,7 +114,9 @@ h1 {
 	width: 320px;
 	height: 100px;
 	color: #060;
-	background-color: white;
+	background-color: #f9f2ec;
+	border: 5px solid #86592d;
+	border-radius: 15px 40px 20px;
 }
 
 .winner {
@@ -119,6 +130,8 @@ h1 {
 	font-size: 150%;
 	line-height: 2.0;
 	padding-left: 5px;
+	border-radius: 8px;
+	border: 3px solid #cc9900;
 }
 
 .drawnCard {
