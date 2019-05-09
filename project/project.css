@@ -178,8 +178,11 @@ h1 {
 
 .doubledownbutton {
 	visibility: hidden;
-	height: 25px;
-	width: 100px;
+	height: 30px;
+	width: 140px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 110%;
 	text-align: center;
 }
 

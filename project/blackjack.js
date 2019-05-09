@@ -303,9 +303,10 @@ function insurance() {
 // Can double down when player total is 10 or 11
 function doubleDown() {
   // double bet amount
-  playerDollars -= player.betAmount;
+  playerDollars -= betAmount;
   document.getElementById("playermoney").innerHTML = "$" + playerDollars;
-  player.betAmount += player.betAmount;
+  betAmount += betAmount;
+  document.getElementById("betamount").value = betAmount;
   // deal 1 player card, then deal dealer cards
   dealPlayerCard();
   dealDealerCards();
