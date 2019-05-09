@@ -222,64 +222,11 @@ function dealDealerCards() {
   if (dealer.aceInHand && dealer.handTotal >= 7 && dealer.handTotal <= 11) {
     dealer.handTotal += 10;
     document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+  } else if (dealer.aceInHand && dealer.handTotal > 21) {
+    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
   }
-
-/*
-  // Calculate correct hand total and see if deal is done
-  if (dealer.handTotal >= 17 || dealer.handTotal <= 21) {
-    // No ace, total between 17 & 21, inclusive
-    document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
-    document.getElementById("dealerheader").style.visibility = "visible";
-    // showAllDealerCards();
-    declareWinner();
-    return null;
-  } else if (dealer.aceInHand && (dealer.handTotal + 10 >= 17 || dealer.handTotal + 10 <= 21)) {
-    // Ace, total between 17 & 21, inclusive
-    document.getElementById("dealerheader").innerHTML = (dealer.handTotal + 10).toString();
-    document.getElementById("dealerheader").style.visibility = "visible";
-    // showAllDealerCards();
-    declareWinner();
-    return null;
-  }
-
-
-  if (dealer.aceInHand && dealer.handTotal < 11) {
-    dealer.handTotal += 10;
-  }
-  document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
-  document.getElementById("dealerheader").style.visibility = "visible";
   
 
-  while (dealer.handTotal < 17 || dealer.handTotal + 10 < 17) {
-    sleep(500);
-    dealDealerCard();
-    if (dealer.handTotal >= 17 || dealer.handTotal <= 21) {
-      // No ace, total between 17 & 21, inclusive
-      document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
-      document.getElementById("dealerheader").style.visibility = "visible";
-      // showAllDealerCards();
-      declareWinner();
-      return null;
-    } else if (dealer.aceInHand && (dealer.handTotal + 10 >= 17 || dealer.handTotal + 10 <= 21)) {
-      // Ace, total between 17 & 21, inclusive
-      document.getElementById("dealerheader").innerHTML = (dealer.handTotal + 10).toString();
-      document.getElementById("dealerheader").style.visibility = "visible";
-      // showAllDealerCards();
-      declareWinner();
-      return null;
-    }
-  }
-
-
-  if (dealer.handTotal >= 17) {
-    showAllDealerCards();
-  } else {
-    while (dealer.handTotal < 17) {
-      sleep(500);
-      dealDealerCard();
-    }
-  }
- */
   declareWinner();
 }
 
@@ -340,7 +287,7 @@ function insurance() {
 // Can double down when player total is 10 or 11
 function doubleDown() {
   // double bet amount
-  playerDollars -= player.betAmount;
+  playerDollars = parseInt(playerDollars) - player.betAmount;
   document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
   player.betAmount += player.betAmount;
   // deal 1 player card, then deal dealer cards
