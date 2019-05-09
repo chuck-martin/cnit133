@@ -69,10 +69,13 @@ class BlackjackHand {
 }
 
 function startGame() {
+  // Set up money amounts
   document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   document.getElementById("betamount").value = betAmount;
   document.getElementById("winner").innerHTML = "";
+  // instantiate new deck of cards
   gameDeck = new DeckOfCards;
+  // Initialize card deck, deck count
   cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("cardcount").innerHTML = 52;
@@ -104,6 +107,7 @@ function newGame() {
   // create player & dealer instances 
   player = new BlackjackHand;
   dealer = new BlackjackHand;
+  // Clear the necessary fields
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("dealer").innerHTML = "";
   document.getElementById("dealer").style.width = "0px";
@@ -117,6 +121,7 @@ function newGame() {
 // Deal 4 cards, 2 each
 function initialDeal() {
   document.getElementById("doubledownbutton").style.visibility = "hidden";
+  // Deal 4 cards, 2 each
   for (var i = 0; i < 4; i++) {
     if (turn == "player") {
       dealPlayerCard();
