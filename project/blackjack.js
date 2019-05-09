@@ -74,6 +74,7 @@ function startGame() {
   document.getElementById("winner").innerHTML = "";
   gameDeck = new DeckOfCards;
   cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
+  document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("cardcount").innerHTML = 52;
 }
 
