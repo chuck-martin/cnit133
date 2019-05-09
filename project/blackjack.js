@@ -120,6 +120,7 @@ function initialDeal() {
     }
   }
 
+  // Is the dealer's up card an ace (used for insurance)
   if (dealer.hand[1].charAt(0) == "A") {
     dealer.dealerShowsAce = true;
   }
@@ -166,6 +167,7 @@ function dealPlayerCard() {
   document.getElementById("player").style.width = (player.hand.length * 100) + "px";
   document.getElementById("player").innerHTML += player.cards[player.cards.length - 1];
   if (player.handTotal > 21) {
+    document.getElementById("dealerheader").style.visibility = "visible";
     showAllDealerCards();
     document.getElementById("winner").innerHTML = "Dealer wins!";
     return null;
@@ -191,7 +193,7 @@ function dealDealerCard() {
   }
   // Update the display of dealer cards
   if (dealer.cards.length < 3) {
-    // On the initial deal, deel the first card as a card back
+    // On the initial deal, deal the first card as a card back
     document.getElementById("dealer").style.width = (dealer.hand.length * 100) + "px";
     document.getElementById("dealer").innerHTML += dealer.cards[dealer.cards.length - 1];
   } else {
@@ -203,22 +205,69 @@ function dealDealerCard() {
 // If we get here, player has 21 or less
 function dealDealerCards() {
   // If player has ace, calculate correct hand total
-  if (player.aceInHand && player.handTotal < 11) {
+  if (player.aceInHand && player.handTotal <= 11) {
       player.handTotal += 10;
   }
   document.getElementById("playerheader").innerHTML = (player.handTotal).toString();
   newDeal = false;
-  // If dealer has ace, calculate correct hand total
+
+  // document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
+  document.getElementById("dealerheader").style.visibility = "visible";
+  showAllDealerCards();
+  while (!stopDealing()) {
+    sleep(500);
+    dealDealerCard();
+  }
+  // If soft 17 to 21, make hand total correct
+  if (dealer.aceInHand && dealer.handTotal >= 7 && dealer.handTotal <= 11) {
+    dealer.handTotal += 10;
+    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+  }
+
+/*
+  // Calculate correct hand total and see if deal is done
+  if (dealer.handTotal >= 17 || dealer.handTotal <= 21) {
+    // No ace, total between 17 & 21, inclusive
+    document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
+    document.getElementById("dealerheader").style.visibility = "visible";
+    // showAllDealerCards();
+    declareWinner();
+    return null;
+  } else if (dealer.aceInHand && (dealer.handTotal + 10 >= 17 || dealer.handTotal + 10 <= 21)) {
+    // Ace, total between 17 & 21, inclusive
+    document.getElementById("dealerheader").innerHTML = (dealer.handTotal + 10).toString();
+    document.getElementById("dealerheader").style.visibility = "visible";
+    // showAllDealerCards();
+    declareWinner();
+    return null;
+  }
+
+
   if (dealer.aceInHand && dealer.handTotal < 11) {
     dealer.handTotal += 10;
   }
   document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
   document.getElementById("dealerheader").style.visibility = "visible";
+  
 
-  while (dealer.handTotal < 17) {
+  while (dealer.handTotal < 17 || dealer.handTotal + 10 < 17) {
     sleep(500);
     dealDealerCard();
-
+    if (dealer.handTotal >= 17 || dealer.handTotal <= 21) {
+      // No ace, total between 17 & 21, inclusive
+      document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
+      document.getElementById("dealerheader").style.visibility = "visible";
+      // showAllDealerCards();
+      declareWinner();
+      return null;
+    } else if (dealer.aceInHand && (dealer.handTotal + 10 >= 17 || dealer.handTotal + 10 <= 21)) {
+      // Ace, total between 17 & 21, inclusive
+      document.getElementById("dealerheader").innerHTML = (dealer.handTotal + 10).toString();
+      document.getElementById("dealerheader").style.visibility = "visible";
+      // showAllDealerCards();
+      declareWinner();
+      return null;
+    }
   }
 
 
@@ -230,8 +279,23 @@ function dealDealerCards() {
       dealDealerCard();
     }
   }
- 
+ */
   declareWinner();
+}
+
+// Used to determine when to stop adding to dealer hand
+// With or without an ace, dealer stands on 17-21
+function stopDealing() {
+  // Dealer has 17 or better
+  if (dealer.handTotal >= 17) {
+    return true;
+  // Soft 17 to soft 21
+  } else if (dealer.aceInHand && dealer.handTotal >= 7 && dealer.handTotal <= 11) {
+    return true;
+  // All other hands, deal another card
+  } else {
+    return false;
+  }
 }
 
 function showAllDealerCards() {
@@ -285,20 +349,18 @@ function doubleDown() {
 }
 
 function declareWinner() {
-  if (player.handTotal > dealer.handTotal && player.handTotal <= 21) {
+  if (((player.handTotal > dealer.handTotal) && player.handTotal <= 21) || dealer.handTotal > 21) {
     document.getElementById("winner").innerHTML = "You win!";
-    // alert("Player wins!");
-    playerDollars += betAmount * 2;
+    playerDollars = parseInt(playerDollars) + betAmount * 2;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
     showAllDealerCards();
-  } else if (dealer.handTotal > player.handTotal && dealer.handTotal <= 21) {
+  } else if ((dealer.handTotal > player.handTotal) && dealer.handTotal <= 21) {
     document.getElementById("winner").innerHTML = "Dealer wins!";
-    // alert("Dealer wins!");
     // No need to update player amount; it was already taken when it was bet
   } else {
     // alert("Push!");
     document.getElementById("winner").innerHTML = "Push!";
-    playerDollars += betAmount;
+    playerDollars = parseInt(playerDollars) + betAmount;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
     showAllDealerCards();
   }
