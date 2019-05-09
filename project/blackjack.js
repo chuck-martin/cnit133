@@ -91,12 +91,14 @@ function newGame() {
       document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
       document.getElementById("winner").innerHTML = "";
   }
-  
+  // If more than 30 cards used, create a fresh deck
+  if (gameDeck.drawnCards > 30) {
+    gameDeck = new DeckOfCards;
+    cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
+  }
   // create player & dealer instances 
-  gameDeck = new DeckOfCards;
   player = new BlackjackHand;
   dealer = new BlackjackHand;
-  cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("dealer").innerHTML = "";
   document.getElementById("dealer").style.width = "0px";
@@ -155,6 +157,7 @@ function initialDeal() {
 function dealPlayerCard() {
   // Add the card to the player hand array
   player.hand.push(gameDeck.getRandomUnusedCard());
+  gameDeck.drawnCards++;
   // add the HTML necesary to display the card to the cards array
   player.cards.push("<img src='" + gameDeck.cardPath + player.hand[player.hand.length - 1] + "'>");
   player.updateHandTotal();
@@ -179,6 +182,7 @@ function dealPlayerCard() {
 function dealDealerCard() {
   // Add the card to the dealer hand array
   dealer.hand.push(gameDeck.getRandomUnusedCard());
+  gameDeck.drawnCards++;
   // add the HTML necesary to display the card to the cards array
   if (dealer.hand.length == 1) {
     dealer.cards.push("<img src='" + gameDeck.cardPath + cardBack + "'>");
