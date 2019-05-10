@@ -7,7 +7,6 @@ Spring 2019 */
 
 window.onload = startGame;
 
-
 // Set up initial variables
 var turn = "player";
 var player;
@@ -15,9 +14,8 @@ var dealer;
 var gameDeck;
 var cardBack;
 var newDeal = true;
-var playerDollars = 1000;
+var playerDollars;
 var betAmount = 0;
-
 
 
 // Class for blackjack hands
@@ -68,17 +66,39 @@ class BlackjackHand {
   }
 }
 
+
 function startGame() {
   // Set up money amounts
-  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   document.getElementById("betamount").value = betAmount;
   document.getElementById("winner").innerHTML = "";
+  document.getElementById("playerbetbutton").disabled = true;
+  document.getElementById("hitme").disabled = true;
+  document.getElementById("stand").disabled = true;
+  getBankroll();
+  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   // instantiate new deck of cards
   gameDeck = new DeckOfCards;
   // Initialize card deck, deck count
   cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("cardcount").innerHTML = 52;
+  document.getElementById("betamount").addEventListener("input", function(){
+    document.getElementById("playerbetbutton").disabled = false;
+  }); 
+}
+
+// Gets starting amount of money
+function getBankroll() {
+  var tryNumber = prompt("How much would you like to play?\nEnter 0 to quit.");
+  if (!tryNumber) {
+    // User pressed Cancel
+    return null;
+  } else {
+    while (isNaN(tryNumber)) {
+      tryNumber = prompt("How much would you like to play?\nEnter 0 to quit.\nEnter numbers only!");
+    }
+    playerDollars = parseInt(tryNumber);
+  }
 }
 
 function newGame() {
@@ -155,6 +175,9 @@ function initialDeal() {
     // playerDollars -= betAmount;
     // document.getElementById("playermoney").innerHTML = "$" + playerDollars.toString();
   }
+
+  document.getElementById("hitme").disabled = false;
+  document.getElementById("stand").disabled = false;
 
   // Test for player eligible to double down
   if (player.handTotal == 10 || player.handTotal == 11) {

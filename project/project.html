@@ -16,7 +16,7 @@
 	<div id="playermoney" class="playermoney"></div>
 	<div class="playerbetamounttext">Enter a bet amount: </div>
 	<input class="playerbetamount" type="number" id="betamount">
-	<input class="playerbetbutton" type="button" class="reset" value="Place bet and deal new hand" onclick="newGame()">
+	<input class="playerbetbutton" id="playerbetbutton" type="button" class="reset" value="Place bet and deal new hand" onclick="newGame()">
 	<div class="rules">
 		<ul>
 			<li>Dealer stands on soft 17</li>
@@ -37,8 +37,8 @@
 	<div class="dealerheader">Dealer: <span id="dealerheader"></span></div>
 	<div id="dealer" class="dealer"></div>
 	<div class="playerheader">Player: <span id="playerheader"></span><br>
-		<input class="playerbutton" type="button" value="Hit me!" onclick="dealPlayerCard()"><br>
-		<input class="playerbutton" type="button" value="Stand" onclick="dealDealerCards()"><br>
+		<input class="playerbutton" id="hitme" type="button" value="Hit me!" onclick="dealPlayerCard()"><br>
+		<input class="playerbutton" id="stand" type="button" value="Stand" onclick="dealDealerCards()"><br>
 		<input type="button" class="doubledownbutton" id="doubledownbutton" value="Double down" onclick="doubleDown()">
 		<input type="button" class="splitpairbutton" id="splitpairbutton" value="Split pair">
 	</div>
