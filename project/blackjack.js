@@ -14,7 +14,7 @@ var dealer;
 var gameDeck;
 var cardBack;
 var newDeal = true;
-var playerDollars;
+var playerDollars = 0;
 var betAmount = 0;
 
 
@@ -90,7 +90,7 @@ function startGame() {
 // Gets starting amount of money
 function getBankroll() {
   var tryNumber = prompt("How much would you like to play?\nEnter 0 to quit.");
-  if (!tryNumber) {
+  if (tryNumber == null) {
     // User pressed Cancel
     return null;
   } else {
