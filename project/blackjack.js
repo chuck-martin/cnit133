@@ -71,9 +71,11 @@ function startGame() {
   // Set up money amounts
   document.getElementById("betamount").value = betAmount;
   document.getElementById("winner").innerHTML = "";
+  // Disable buttons until the game is set up
   document.getElementById("playerbetbutton").disabled = true;
   document.getElementById("hitme").disabled = true;
   document.getElementById("stand").disabled = true;
+  // Ask player how much they want to play, put that number in the field
   getBankroll();
   document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   // instantiate new deck of cards
@@ -82,6 +84,7 @@ function startGame() {
   cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
   document.getElementById("cardcount").innerHTML = 52;
+  // Allows bet button to be enabled after player enters a bet amount
   document.getElementById("betamount").addEventListener("input", function(){
     document.getElementById("playerbetbutton").disabled = false;
   }); 
