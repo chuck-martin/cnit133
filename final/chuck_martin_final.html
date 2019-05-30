@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Dealing a Hand of Cards</title>
+	<link rel="stylesheet" href="cnit133.css">
+	<link rel="stylesheet" href="chuck_martin_final.css">
+	<script src="cards.js"></script>
+	<script src="chuck_martin_final.js"></script>
+</head>
+<body>
+	<h1>Dealing a Hand of Cards</h1>
+	<img class="deck" id="deck" src="">
+	<div class="cardcount" id="cardcount"></div>
+	<p class="handCards">Cards in Hand:<br>
+		<label for="five"><input type="radio" id="five" name="handCards" value="five" class="radio">Five</label>
+		<label for="seven"><input type="radio" id="seven" name="handCards" value="seven" class="radio">Seven</label>
+	</p>
+	<input class="playerbetbutton" id="playerbetbutton" type="button" class="reset" value="Deal new hand" onclick="newGame()">
+	
+
+	<div class="playerheader">Player: <span id="playerheader"></span><br>
+		<input class="playerbutton" id="hitme" type="button" value="Deal card" onclick="dealPlayerCard()">
+	</div>
+
+	<div id="player" class="player"></div>
+
+	<div class="timesplayed">Times played:<input type="text" id="timesplayed"></div>
+	<div class="cardsdealt">
+		<table>
+			<tr><td>AC</td><td id="AC">0</td><td>AD</td><td id="AD">0</td><td>AH</td><td id="AH">0</td><td>AS</td><td id="AS">0</td></tr>
+			<tr><td>2C</td><td id="2C">0</td><td>2D</td><td id="2D">0</td><td>2H</td><td id="2H">0</td><td>2S</td><td id="2S">0</td></tr>
+			<tr><td>3C</td><td id="3C">0</td><td>3D</td><td id="3D">0</td><td>3H</td><td id="3H">0</td><td>3S</td><td id="3S">0</td></tr>
+			<tr><td>4C</td><td id="4C">0</td><td>4D</td><td id="4D">0</td><td>4H</td><td id="4H">0</td><td>4S</td><td id="4S">0</td></tr>
+			<tr><td>5C</td><td id="5C">0</td><td>5D</td><td id="5D">0</td><td>5H</td><td id="5H">0</td><td>5S</td><td id="5S">0</td></tr>
+			<tr><td>6C</td><td id="6C">0</td><td>6D</td><td id="6D">0</td><td>6H</td><td id="6H">0</td><td>6S</td><td id="6S">0</td></tr>
+			<tr><td>7C</td><td id="7C">0</td><td>7D</td><td id="7D">0</td><td>7H</td><td id="7H">0</td><td>7S</td><td id="7S">0</td></tr>
+			<tr><td>8C</td><td id="8C">0</td><td>8D</td><td id="8D">0</td><td>8H</td><td id="8H">0</td><td>8S</td><td id="8S">0</td></tr>
+			<tr><td>9C</td><td id="9C">0</td><td>9D</td><td id="9D">0</td><td>9H</td><td id="9H">0</td><td>9S</td><td id="9S">0</td></tr>
+			<tr><td>TC</td><td id="TC">0</td><td>TD</td><td id="TD">0</td><td>TH</td><td id="TH">0</td><td>TS</td><td id="TS">0</td></tr>
+			<tr><td>JC</td><td id="JC">0</td><td>JD</td><td id="JD">0</td><td>JH</td><td id="JH">0</td><td>JS</td><td id="JS">0</td></tr>
+			<tr><td>QC</td><td id="QC">0</td><td>QD</td><td id="QD">0</td><td>QH</td><td id="QH">0</td><td>QS</td><td id="QS">0</td></tr>
+			<tr><td>KC</td><td id="KC">0</td><td>KD</td><td id="KD">0</td><td>KH</td><td id="KH">0</td><td>KS</td><td id="KS">0</td></tr>
+		</table>
+
+
+
+	</div>
+
+</body>
+</html>
