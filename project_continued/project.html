@@ -12,11 +12,14 @@
 	<h1>Blackjack</h1>
 	<img class="deck" id="deck" src="">
 	<div class="cardcount" id="cardcount"></div>
-	<div class="playermoneytext">Bankroll: </div>
+	<div class="addfundstext">Enter amount to add: </div>
+	<input class="addfundsamount" type="number" id="addfundsamount">
+	<button class="addfundsbutton" id="addfundsbutton" type="button" onclick="addFunds()">Add</button>
+	<div class="playermoneytext">Amount available to bet: </div>
 	<div id="playermoney" class="playermoney"></div>
 	<div class="playerbetamounttext">Enter a bet amount: </div>
 	<input class="playerbetamount" type="number" id="betamount">
-	<input class="playerbetbutton" id="playerbetbutton" type="button" class="reset" value="Place bet and deal new hand" onclick="newGame()">
+	<button class="playerbetbutton" id="playerbetbutton" type="button" class="reset" onclick="newGame()">Place bet and deal new hand</button>
 	<div class="rules">
 		<ul>
 			<li>Dealer stands on soft 17</li>

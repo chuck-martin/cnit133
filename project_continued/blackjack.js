@@ -76,8 +76,8 @@ function startGame() {
   document.getElementById("hitme").disabled = true;
   document.getElementById("stand").disabled = true;
   // Ask player how much they want to play, put that number in the field
-  getBankroll();
-  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
+  // getBankroll();
+  //document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   // instantiate new deck of cards
   gameDeck = new DeckOfCards;
   // Initialize card deck, deck count
@@ -102,6 +102,15 @@ function getBankroll() {
     }
     playerDollars = parseInt(tryNumber);
   }
+}
+
+// Add funds to bankroll
+function addFunds() {
+  var currentfunds = parseInt(document.getElementById("playermoney").value);
+  var newmoney = parseInt(document.getElementById("addfundsamount").value);
+  var newtotal = currentfunds + newmoney;
+  alert(newtotal);
+  document.getElementById("playermoney").value = newtotal;
 }
 
 function newGame() {

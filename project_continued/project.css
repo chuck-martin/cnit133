@@ -6,6 +6,8 @@ h1 {
 	color: white;
 }
 
+button { cursor:pointer; }
+
 .deal {
 	position: fixed;
 	top: 100px;
@@ -29,7 +31,7 @@ h1 {
 .cardcount {
 	position: fixed;
 	top: 170px;
-	left: 200px;
+	left: 160px;
 	height: 25px;
 	width: 25px;
 	text-align: center;
@@ -38,9 +40,49 @@ h1 {
 	border-radius: 10px;
 }
 
-.playermoneytext {
+.addfundstext {
 	position: fixed;
 	top: 80px;
+	left: 200px;
+	height: 30px;
+	width: 180px;
+	border: 0.5px solid #060;
+	text-align: right;
+	vertical-align: bottom;
+	line-height: 1.8;
+	font-size: 100%;
+	color: white;
+	border-radius: 5px;
+}
+
+.addfundsamount {
+	position: fixed;
+	top: 80px;
+	left: 400px;
+	height: 30px;
+	width: 80px;
+	border: 0.5px solid #060;
+	text-align: right;
+	font-size: 110%;
+	border-radius: 5px;
+	padding-right: 5px;
+}
+
+.addfundsbutton {
+	position: fixed;
+	top: 80px;
+	left: 500px;
+	height: 30px;
+	width: 60px;
+	border: 0.5px solid #060;
+	text-align: center;
+	font-size: 120%;
+	border-radius: 5px;
+}
+
+.playermoneytext {
+	position: fixed;
+	top: 120px;
 	left: 200px;
 	height: 30px;
 	width: 200px;
@@ -53,9 +95,11 @@ h1 {
 	border-radius: 5px;
 }
 
+
+
 .playermoney {
 	position: fixed;
-	top: 80px;
+	top: 120px;
 	left: 425px;
 	height: 30px;
 	width: 120px;
@@ -69,7 +113,7 @@ h1 {
 
 .playerbetamounttext {
 	position: fixed;
-	top: 120px;
+	top: 160px;
 	left: 200px;
 	height: 30px;
 	width: 200px;
@@ -84,7 +128,7 @@ h1 {
 
 .playerbetamount {
 	position: fixed;
-	top: 120px;
+	top: 160px;
 	left: 425px;
 	height: 30px;
 	width: 120px;
@@ -97,7 +141,7 @@ h1 {
 
 .playerbetbutton {
 	position: fixed;
-	top: 120px;
+	top: 160px;
 	left: 580px;
 	height: 30px;
 	width: 300px;
