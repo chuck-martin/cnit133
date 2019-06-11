@@ -17,6 +17,29 @@ var newDeal = true;
 var playerDollars = 0;
 var betAmount = 0;
 
+// Class for game: values and other stuff
+// New game object should be instantiated every time the page loads
+class BlackjackGame {
+  constructor(
+    turn = "player",
+    playerHand,
+    dealerHand,
+    gameDeck,
+    cardBack,
+    newDeal = true,
+    playerDollars = 0,
+    betAmount = 0)
+  {
+    this.turn = turn;
+    this.playerHand = playerHand;
+    this.dealerHand = dealerHand;
+    this.gameDeck = gameDeck;
+    this.cardBack = cardBack;
+    this.newDeal = newDeal;
+    this.playerDollars = playerDollars;
+    this.betAmount = betAmount;
+  }
+}
 
 // Class for blackjack hands
 class BlackjackHand {
@@ -68,8 +91,11 @@ class BlackjackHand {
 
 
 function startGame() {
+  // Instantiate game object
+  game = new BlackjackGame;
   // Set up money amounts
-  document.getElementById("betamount").value = betAmount;
+  document.getElementById("addfundsamount").value = 0;
+  document.getElementById("betamount").value = game.betAmount;
   document.getElementById("winner").innerHTML = "";
   // Disable buttons until the game is set up
   document.getElementById("playerbetbutton").disabled = true;
@@ -137,7 +163,7 @@ function newGame() {
     document.getElementById("cardcount").innerHTML = 52;
   }
   // create player & dealer instances 
-  player = new BlackjackHand;
+  game.player = new BlackjackHand;
   dealer = new BlackjackHand;
   // Clear the necessary fields
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
@@ -155,12 +181,12 @@ function initialDeal() {
   document.getElementById("doubledownbutton").style.visibility = "hidden";
   // Deal 4 cards, 2 each
   for (var i = 0; i < 4; i++) {
-    if (turn == "player") {
+    if (game.turn == "player") {
       dealPlayerCard();
-      turn = "dealer";
+      game.turn = "dealer";
     } else {
       dealDealerCard();
-      turn = "player";
+      game.turn = "player";
     }
   }
 
@@ -171,7 +197,7 @@ function initialDeal() {
 
   // Test for blackjacks
   // If player gets blackjack, player wins, game over, start new game
-  if (isBlackJack(player)) {
+  if (isBlackJack(game.player)) {
     document.getElementById("winner").innerHTML = "Blackjack! You win!";
     // alert("You win!");
     playerDollars += betAmount * 2.5;
@@ -192,7 +218,7 @@ function initialDeal() {
   document.getElementById("stand").disabled = false;
 
   // Test for player eligible to double down
-  if (player.handTotal == 10 || player.handTotal == 11) {
+  if (game.player.handTotal == 10 || game.player.handTotal == 11) {
     document.getElementById("doubledownbutton").style.visibility = "visible";
   }
 
@@ -201,21 +227,21 @@ function initialDeal() {
 
 function dealPlayerCard() {
   // Add the card to the player hand array
-  player.hand.push(gameDeck.getRandomUnusedCard());
+  game.player.hand.push(gameDeck.getRandomUnusedCard());
   gameDeck.drawnCards++;
   document.getElementById("cardcount").innerHTML = 52 - gameDeck.drawnCards;
   // add the HTML necesary to display the card to the cards array
-  player.cards.push("<img src='" + gameDeck.cardPath + player.hand[player.hand.length - 1] + "'>");
-  player.updateHandTotal();
-  if (player.aceInHand) {
-    document.getElementById("playerheader").innerHTML = player.handTotal.toString() + " or " + (player.handTotal + 10).toString();
+  game.player.cards.push("<img src='" + gameDeck.cardPath + game.player.hand[game.player.hand.length - 1] + "'>");
+  game.player.updateHandTotal();
+  if (game.player.aceInHand) {
+    document.getElementById("playerheader").innerHTML = game.player.handTotal.toString() + " or " + (game.player.handTotal + 10).toString();
   } else {
-    document.getElementById("playerheader").innerHTML = player.handTotal.toString();
+    document.getElementById("playerheader").innerHTML = game.player.handTotal.toString();
   }
   // Update the display of player cards
-  document.getElementById("player").style.width = (player.hand.length * 100) + "px";
-  document.getElementById("player").innerHTML += player.cards[player.cards.length - 1];
-  if (player.handTotal > 21) {
+  document.getElementById("player").style.width = (game.player.hand.length * 100) + "px";
+  document.getElementById("player").innerHTML += game.player.cards[game.player.cards.length - 1];
+  if (game.player.handTotal > 21) {
     document.getElementById("dealerheader").style.visibility = "visible";
     showAllDealerCards();
     document.getElementById("winner").innerHTML = "Dealer wins!";
@@ -250,16 +276,15 @@ function dealDealerCard() {
   } else {
     showAllDealerCards();
   }
-  
 }
 
 // If we get here, player has 21 or less
 function dealDealerCards() {
   // If player has ace, calculate correct hand total
-  if (player.aceInHand && player.handTotal <= 11) {
-      player.handTotal += 10;
+  if (game.player.aceInHand && game.player.handTotal <= 11) {
+      game.player.handTotal += 10;
   }
-  document.getElementById("playerheader").innerHTML = (player.handTotal).toString();
+  document.getElementById("playerheader").innerHTML = (game.player.handTotal).toString();
   newDeal = false;
 
   // document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
@@ -276,7 +301,6 @@ function dealDealerCards() {
   } else if (dealer.aceInHand && dealer.handTotal > 21) {
     document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
   }
-  
 
   declareWinner();
 }
@@ -348,12 +372,12 @@ function doubleDown() {
 }
 
 function declareWinner() {
-  if (((player.handTotal > dealer.handTotal) && player.handTotal <= 21) || dealer.handTotal > 21) {
+  if (((game.player.handTotal > dealer.handTotal) && game.player.handTotal <= 21) || dealer.handTotal > 21) {
     document.getElementById("winner").innerHTML = "You win!";
     playerDollars +=  betAmount * 2;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars;
     showAllDealerCards();
-  } else if ((dealer.handTotal > player.handTotal) && dealer.handTotal <= 21) {
+  } else if ((dealer.handTotal > game.player.handTotal) && dealer.handTotal <= 21) {
     document.getElementById("winner").innerHTML = "Dealer wins!";
     // No need to update player amount; it was already taken when it was bet
   } else {
