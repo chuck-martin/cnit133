@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Blackjack</title>
+	<link rel="stylesheet" href="../cnit133.css">
+	<link rel="stylesheet" href="project.css">
+	<script src="cards_set.js"></script>
+	<script src="blackjack.js"></script>
+</head>
+<body>
+	<h1>Blackjack</h1>
+	<img class="deck" id="deck" src="">
+	<div class="cardcount" id="cardcount"></div>
+	<div class="addfundstext">Enter amount to add: </div>
+	<input class="addfundsamount" type="number" id="addfundsamount">
+	<button class="addfundsbutton" id="addfundsbutton" type="button" onclick="addFunds()">Add</button>
+	<div class="playermoneytext">Amount available to bet: </div>
+	<div id="playermoney" class="playermoney"></div>
+	<div class="playerbetamounttext">Enter a bet amount: </div>
+	<input class="playerbetamount" type="number" id="betamount">
+	<button class="playerbetbutton" id="playerbetbutton" type="button" class="reset" onclick="newGame()">Place bet and deal new hand</button>
+	<div class="rules">
+		<ul>
+			<li>Dealer stands on soft 17</li>
+			<li>Player can double down on 10 or 11 only</li>
+		</ul>
+	</div>
+	<div class="winner" id="winner"></div>
+
+	<!-- <p><img src="" id="card" width="200px"></p>
+	<p>Cards used: <span id="cardsused"></span></p> -->
+	<p>
+		<!-- <img class="drawnCard" id="drawnCard" src=""> 
+		<input type="button" class="deal" value="New Card" onclick="dealCard()"> -->
+		
+		
+		
+	</p>
+	<div class="dealerheader">Dealer: <span id="dealerheader"></span></div>
+	<div id="dealer" class="dealer"></div>
+	<div class="playerheader">Player: <span id="playerheader"></span><br>
+		<input class="playerbutton" id="hitme" type="button" value="Hit me!" onclick="dealPlayerCard()"><br>
+		<input class="playerbutton" id="stand" type="button" value="Stand" onclick="dealDealerCards()"><br>
+		<input type="button" class="doubledownbutton" id="doubledownbutton" value="Double down" onclick="doubleDown()">
+		<input type="button" class="splitpairbutton" id="splitpairbutton" value="Split pair">
+	</div>
+
+	<div id="player" class="player"></div>
+	<div id="secondhand" class="secondhand"></div>
+
+</body>
+</html>

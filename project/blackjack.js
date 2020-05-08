@@ -16,7 +16,7 @@ var cardBack;
 var newDeal = true;
 var playerDollars = 0;
 var betAmount = 0;
-
+var doubleDown = false;
 
 // Class for blackjack hands
 class BlackjackHand {
@@ -328,6 +328,7 @@ function insurance() {
 
 // Can double down when player total is 10 or 11
 function doubleDown() {
+  doubleDown = true;
   // double bet amount
   playerDollars -= betAmount;
   document.getElementById("playermoney").innerHTML = "$" + playerDollars;
@@ -353,6 +354,9 @@ function declareWinner() {
     playerDollars += betAmount;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars;
     showAllDealerCards();
+  }
+  if (doubleDown) {
+    document.getElementById("betamount").value = (betAmount / 2);
   }
 }
 

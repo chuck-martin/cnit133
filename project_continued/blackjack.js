@@ -9,6 +9,7 @@ window.onload = startGame;
 
 // Set up initial variables
 var turn = "player";
+var game;
 var player;
 var dealer;
 var gameDeck;
@@ -16,6 +17,7 @@ var cardBack;
 var newDeal = true;
 var playerDollars = 0;
 var betAmount = 0;
+var doubleDown = false;
 
 // Class for game: values and other stuff
 // New game object should be instantiated every time the page loads
@@ -89,12 +91,13 @@ class BlackjackHand {
   }
 }
 
-
+// Runs when page loads
 function startGame() {
   // Instantiate game object
   game = new BlackjackGame;
   // Set up money amounts
   document.getElementById("addfundsamount").value = 0;
+  document.getElementById("playermoney").innerHTML = "0";
   document.getElementById("betamount").value = game.betAmount;
   document.getElementById("winner").innerHTML = "";
   // Disable buttons until the game is set up
@@ -109,7 +112,7 @@ function startGame() {
   // Initialize card deck, deck count
   cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
   document.getElementById("deck").src = gameDeck.cardPath + cardBack;
-  document.getElementById("cardcount").innerHTML = 52;
+  document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
   // Allows bet button to be enabled after player enters a bet amount
   document.getElementById("betamount").addEventListener("input", function(){
     document.getElementById("playerbetbutton").disabled = false;
@@ -132,11 +135,11 @@ function getBankroll() {
 
 // Add funds to bankroll
 function addFunds() {
-  var currentfunds = parseInt(document.getElementById("playermoney").value);
+  var currentfunds = parseInt(document.getElementById("playermoney").innerHTML);
   var newmoney = parseInt(document.getElementById("addfundsamount").value);
-  var newtotal = currentfunds + newmoney;
-  alert(newtotal);
-  document.getElementById("playermoney").value = newtotal;
+  playerDollars = currentfunds + newmoney;
+  document.getElementById("playermoney").innerHTML = playerDollars;
+  document.getElementById("addfundsamount").value = 0;
 }
 
 function newGame() {
@@ -157,10 +160,10 @@ function newGame() {
       document.getElementById("winner").innerHTML = "";
   }
   // If more than 30 cards used, create a fresh deck
-  if (gameDeck.drawnCards > 30) {
+  if (gameDeck.deck.size < 20) {
     gameDeck = new DeckOfCards;
     cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
-    document.getElementById("cardcount").innerHTML = 52;
+    document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
   }
   // create player & dealer instances 
   game.player = new BlackjackHand;
@@ -229,7 +232,7 @@ function dealPlayerCard() {
   // Add the card to the player hand array
   game.player.hand.push(gameDeck.getRandomUnusedCard());
   gameDeck.drawnCards++;
-  document.getElementById("cardcount").innerHTML = 52 - gameDeck.drawnCards;
+  document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
   // add the HTML necesary to display the card to the cards array
   game.player.cards.push("<img src='" + gameDeck.cardPath + game.player.hand[game.player.hand.length - 1] + "'>");
   game.player.updateHandTotal();
@@ -255,7 +258,7 @@ function dealDealerCard() {
   // Add the card to the dealer hand array
   dealer.hand.push(gameDeck.getRandomUnusedCard());
   gameDeck.drawnCards++;
-  document.getElementById("cardcount").innerHTML = 52 - gameDeck.drawnCards;
+  document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
   // add the HTML necesary to display the card to the cards array
   if (dealer.hand.length == 1) {
     dealer.cards.push("<img src='" + gameDeck.cardPath + cardBack + "'>");
@@ -361,6 +364,7 @@ function insurance() {
 
 // Can double down when player total is 10 or 11
 function doubleDown() {
+  doubleDown = true;
   // double bet amount
   playerDollars -= betAmount;
   document.getElementById("playermoney").innerHTML = "$" + playerDollars;
@@ -386,6 +390,9 @@ function declareWinner() {
     playerDollars += betAmount;
     document.getElementById("playermoney").innerHTML = "$" + playerDollars;
     showAllDealerCards();
+  }
+  if (doubleDown) {
+    document.getElementById("betamount").value = (betAmount / 2);
   }
 }
 
