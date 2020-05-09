@@ -108,11 +108,11 @@ function startGame() {
   // getBankroll();
   //document.getElementById("playermoney").innerHTML = "$" + playerDollars;
   // instantiate new deck of cards
-  gameDeck = new DeckOfCards;
+  game.gameDeck = new DeckOfCards;
   // Initialize card deck, deck count
-  cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
-  document.getElementById("deck").src = gameDeck.cardPath + cardBack;
-  document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
+  game.cardBack = game.gameDeck.cardBacks[Math.floor(Math.random() * game.gameDeck.cardBacks.length)];
+  document.getElementById("deck").src = game.gameDeck.cardPath + game.cardBack;
+  document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   // Allows bet button to be enabled after player enters a bet amount
   document.getElementById("betamount").addEventListener("input", function(){
     document.getElementById("playerbetbutton").disabled = false;
@@ -129,7 +129,7 @@ function getBankroll() {
     while (isNaN(tryNumber)) {
       tryNumber = prompt("How much would you like to play?\nEnter 0 to quit.\nEnter numbers only!");
     }
-    playerDollars = parseInt(tryNumber);
+    game.playerDollars = parseInt(tryNumber);
   }
 }
 
@@ -137,45 +137,45 @@ function getBankroll() {
 function addFunds() {
   var currentfunds = parseInt(document.getElementById("playermoney").innerHTML);
   var newmoney = parseInt(document.getElementById("addfundsamount").value);
-  playerDollars = currentfunds + newmoney;
-  document.getElementById("playermoney").innerHTML = playerDollars;
+  game.playerDollars = currentfunds + newmoney;
+  document.getElementById("playermoney").innerHTML = game.playerDollars;
   document.getElementById("addfundsamount").value = 0;
 }
 
 function newGame() {
   // Get bet amount
-  betAmount = parseInt(document.getElementById("betamount").value);
-  if (parseInt(betAmount) == NaN) {
+  game.betAmount = parseInt(document.getElementById("betamount").value);
+  if (parseInt(game.betAmount) == NaN) {
     alert("No number entered.");
     return;
-  } else if (parseInt(betAmount) < 0 || parseInt(betAmount) > playerDollars) {
+  } else if (parseInt(game.betAmount) < 0 || parseInt(betAmount) > playerDollars) {
     alert("Invalid amount entered");
     return;
-  } else  if (parseInt(betAmount) == 0) {
+  } else  if (parseInt(game.betAmount) == 0) {
     alert("Thanks for playing!");
     return;
   } else {
-      playerDollars -= parseInt(betAmount);
-      document.getElementById("playermoney").innerHTML = "$" + playerDollars;
+      game.playerDollars -= parseInt(game.betAmount);
+      document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
       document.getElementById("winner").innerHTML = "";
   }
   // If more than 30 cards used, create a fresh deck
-  if (gameDeck.deck.size < 20) {
-    gameDeck = new DeckOfCards;
-    cardBack = gameDeck.cardBacks[Math.floor(Math.random() * gameDeck.cardBacks.length)];
-    document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
+  if (game.gameDeck.deck.size < 20) {
+    game.gameDeck = new DeckOfCards;
+    game.cardBack = gameDeck.cardBacks[Math.floor(Math.random() * game.gameDeck.cardBacks.length)];
+    document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   }
   // create player & dealer instances 
-  game.player = new BlackjackHand;
-  dealer = new BlackjackHand;
+  game.playerHand = new BlackjackHand;
+  game.dealerHand = new BlackjackHand;
   // Clear the necessary fields
-  document.getElementById("deck").src = gameDeck.cardPath + cardBack;
+  document.getElementById("deck").src = game.gameDeck.cardPath + game.cardBack;
   document.getElementById("dealer").innerHTML = "";
   document.getElementById("dealer").style.width = "0px";
   document.getElementById("dealerheader").style.visibility = "hidden";
   document.getElementById("player").innerHTML = "";
   document.getElementById("player").style.width = "0px";
-  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
+  document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
   initialDeal();
 }
 
@@ -230,21 +230,21 @@ function initialDeal() {
 
 function dealPlayerCard() {
   // Add the card to the player hand array
-  game.player.hand.push(gameDeck.getRandomUnusedCard());
-  gameDeck.drawnCards++;
-  document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
+  game.playerHand.hand.push(game.gameDeck.getRandomUnusedCard());
+  // gameDeck.drawnCards++;
+  document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   // add the HTML necesary to display the card to the cards array
-  game.player.cards.push("<img src='" + gameDeck.cardPath + game.player.hand[game.player.hand.length - 1] + "'>");
-  game.player.updateHandTotal();
-  if (game.player.aceInHand) {
-    document.getElementById("playerheader").innerHTML = game.player.handTotal.toString() + " or " + (game.player.handTotal + 10).toString();
+  game.playerHand.cards.push("<img src='" + game.gameDeck.cardPath + game.playerHand.hand[game.playerHand.hand.length - 1] + "'>");
+  game.playerHand.updateHandTotal();
+  if (game.playerHand.aceInHand) {
+    document.getElementById("playerheader").innerHTML = game.playerHand.handTotal.toString() + " or " + (game.playerHand.handTotal + 10).toString();
   } else {
-    document.getElementById("playerheader").innerHTML = game.player.handTotal.toString();
+    document.getElementById("playerheader").innerHTML = game.playerHand.handTotal.toString();
   }
   // Update the display of player cards
-  document.getElementById("player").style.width = (game.player.hand.length * 100) + "px";
-  document.getElementById("player").innerHTML += game.player.cards[game.player.cards.length - 1];
-  if (game.player.handTotal > 21) {
+  document.getElementById("player").style.width = (game.playerHand.hand.length * 100) + "px";
+  document.getElementById("player").innerHTML += game.playerHand.cards[game.playerHand.cards.length - 1];
+  if (game.playerHand.handTotal > 21) {
     document.getElementById("dealerheader").style.visibility = "visible";
     showAllDealerCards();
     document.getElementById("winner").innerHTML = "Dealer wins!";
@@ -256,26 +256,26 @@ function dealPlayerCard() {
 
 function dealDealerCard() {
   // Add the card to the dealer hand array
-  dealer.hand.push(gameDeck.getRandomUnusedCard());
-  gameDeck.drawnCards++;
-  document.getElementById("cardcount").innerHTML = gameDeck.deck.size;
+  game.dealerHand.hand.push(game.gameDeck.getRandomUnusedCard());
+  // gameDeck.drawnCards++;
+  document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   // add the HTML necesary to display the card to the cards array
-  if (dealer.hand.length == 1) {
-    dealer.cards.push("<img src='" + gameDeck.cardPath + cardBack + "'>");
+  if (game.dealerHand.hand.length == 1) {
+    game.dealerHand.cards.push("<img src='" + game.gameDeck.cardPath + cardBack + "'>");
   } else {
-    dealer.cards.push("<img src='" + gameDeck.cardPath + dealer.hand[dealer.hand.length - 1] + "'>");
+    game.dealerHand.cards.push("<img src='" + game.gameDeck.cardPath + game.dealerHand.hand[game.dealerHand.hand.length - 1] + "'>");
   }
-  dealer.updateHandTotal();
-  if (dealer.aceInHand) {
-    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString() + " or " + (dealer.handTotal + 10).toString();
+  game.dealerHand.updateHandTotal();
+  if (game.dealerHand.aceInHand) {
+    document.getElementById("dealerheader").innerHTML = game.dealerHand.handTotal.toString() + " or " + (game.dealerHand.handTotal + 10).toString();
   } else {
-    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+    document.getElementById("dealerheader").innerHTML = game.dealerHand.handTotal.toString();
   }
   // Update the display of dealer cards
-  if (dealer.cards.length < 3) {
+  if (game.dealerHand.cards.length < 3) {
     // On the initial deal, deal the first card as a card back
-    document.getElementById("dealer").style.width = (dealer.hand.length * 100) + "px";
-    document.getElementById("dealer").innerHTML += dealer.cards[dealer.cards.length - 1];
+    document.getElementById("dealer").style.width = (game.dealerHand.hand.length * 100) + "px";
+    document.getElementById("dealer").innerHTML += game.dealerHand.cards[game.dealerHand.cards.length - 1];
   } else {
     showAllDealerCards();
   }
