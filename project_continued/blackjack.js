@@ -148,7 +148,7 @@ function newGame() {
   if (parseInt(game.betAmount) == NaN) {
     alert("No number entered.");
     return;
-  } else if (parseInt(game.betAmount) < 0 || parseInt(betAmount) > playerDollars) {
+  } else if (parseInt(game.betAmount) < 0 || parseInt(betAmount) > game.playerDollars) {
     alert("Invalid amount entered");
     return;
   } else  if (parseInt(game.betAmount) == 0) {
@@ -194,21 +194,21 @@ function initialDeal() {
   }
 
   // Is the dealer's up card an ace (used for insurance)
-  if (dealer.hand[1].charAt(0) == "A") {
-    dealer.dealerShowsAce = true;
+  if (game.dealerHand.hand[1].charAt(0) == "A") {
+    game.dealerHand.dealerShowsAce = true;
   }
 
   // Test for blackjacks
   // If player gets blackjack, player wins, game over, start new game
-  if (isBlackJack(game.player)) {
+  if (isBlackJack(game.playerHand)) {
     document.getElementById("winner").innerHTML = "Blackjack! You win!";
     // alert("You win!");
-    playerDollars += betAmount * 2.5;
-    document.getElementById("playermoney").innerHTML = "$" + playerDollars;
+    game.playerDollars += game.betAmount * 2.5;
+    document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
     showAllDealerCards();
     return null;
     // Player doesn't have blackjack, but if dealer gets blackjack, dealer wins, game over, start new game
-  } else if (isBlackJack(dealer)) {
+  } else if (isBlackJack(game.dealerHand)) {
     showAllDealerCards();
     document.getElementById("winner").innerHTML = "Blackjack! Dealer wins!";
     return null;
@@ -221,7 +221,7 @@ function initialDeal() {
   document.getElementById("stand").disabled = false;
 
   // Test for player eligible to double down
-  if (game.player.handTotal == 10 || game.player.handTotal == 11) {
+  if (game.playerHand.handTotal == 10 || game.playerHand.handTotal == 11) {
     document.getElementById("doubledownbutton").style.visibility = "visible";
   }
 
@@ -261,7 +261,7 @@ function dealDealerCard() {
   document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   // add the HTML necesary to display the card to the cards array
   if (game.dealerHand.hand.length == 1) {
-    game.dealerHand.cards.push("<img src='" + game.gameDeck.cardPath + cardBack + "'>");
+    game.dealerHand.cards.push("<img src='" + game.gameDeck.cardPath + game.cardBack + "'>");
   } else {
     game.dealerHand.cards.push("<img src='" + game.gameDeck.cardPath + game.dealerHand.hand[game.dealerHand.hand.length - 1] + "'>");
   }
@@ -284,10 +284,10 @@ function dealDealerCard() {
 // If we get here, player has 21 or less
 function dealDealerCards() {
   // If player has ace, calculate correct hand total
-  if (game.player.aceInHand && game.player.handTotal <= 11) {
-      game.player.handTotal += 10;
+  if (game.playerHand.aceInHand && game.playerHand.handTotal <= 11) {
+      game.playerHand.handTotal += 10;
   }
-  document.getElementById("playerheader").innerHTML = (game.player.handTotal).toString();
+  document.getElementById("playerheader").innerHTML = (game.playerHand.handTotal).toString();
   newDeal = false;
 
   // document.getElementById("dealerheader").innerHTML = (dealer.handTotal).toString();
@@ -298,11 +298,11 @@ function dealDealerCards() {
     dealDealerCard();
   }
   // If soft 17 to 21, make hand total correct
-  if (dealer.aceInHand && dealer.handTotal >= 7 && dealer.handTotal <= 11) {
-    dealer.handTotal += 10;
-    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
-  } else if (dealer.aceInHand && dealer.handTotal > 21) {
-    document.getElementById("dealerheader").innerHTML = dealer.handTotal.toString();
+  if (game.dealerHand.aceInHand && game.dealerHand.handTotal >= 7 && game.dealerHand.handTotal <= 11) {
+    game.dealerHand.handTotal += 10;
+    document.getElementById("dealerheader").innerHTML = game.dealerHand.handTotal.toString();
+  } else if (game.dealerHand.aceInHand && game.dealerHand.handTotal > 21) {
+    document.getElementById("dealerheader").innerHTML = game.dealerHand.handTotal.toString();
   }
 
   declareWinner();
@@ -312,10 +312,10 @@ function dealDealerCards() {
 // With or without an ace, dealer stands on 17-21
 function stopDealing() {
   // Dealer has 17 or better
-  if (dealer.handTotal >= 17) {
+  if (game.dealerHand.handTotal >= 17) {
     return true;
   // Soft 17 to soft 21
-  } else if (dealer.aceInHand && dealer.handTotal >= 7 && dealer.handTotal <= 11) {
+  } else if (game.dealerHand.aceInHand && game.dealerHand.handTotal >= 7 && game.dealerHand.handTotal <= 11) {
     return true;
   // All other hands, deal another card
   } else {
@@ -324,11 +324,11 @@ function stopDealing() {
 }
 
 function showAllDealerCards() {
-  dealer.cards[0] = "<img src='" + gameDeck.cardPath + dealer.hand[0] + "'>";
-  document.getElementById("dealer").style.width = (dealer.hand.length * 100) + "px";
+  game.dealerHand.cards[0] = "<img src='" + game.gameDeck.cardPath + game.dealerHand.hand[0] + "'>";
+  document.getElementById("dealer").style.width = (game.dealerHand.hand.length * 100) + "px";
   var tempHTML = "";
-  for (var i = 0; i < dealer.cards.length; i++) {
-    tempHTML += dealer.cards[i];
+  for (var i = 0; i < game.dealerHand.cards.length; i++) {
+    tempHTML += game.dealerHand.cards[i];
   }
   document.getElementById("dealer").innerHTML = tempHTML;
 }
@@ -363,36 +363,36 @@ function insurance() {
 }
 
 // Can double down when player total is 10 or 11
-function doubleDown() {
+function playerDoubleDown() {
   doubleDown = true;
   // double bet amount
-  playerDollars -= betAmount;
-  document.getElementById("playermoney").innerHTML = "$" + playerDollars;
-  betAmount += betAmount;
-  document.getElementById("betamount").value = betAmount;
+  game.playerDollars -= game.betAmount;
+  document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
+  game.betAmount += game.betAmount;
+  document.getElementById("betamount").value = game.betAmount;
   // deal 1 player card, then deal dealer cards
   dealPlayerCard();
   dealDealerCards();
 }
 
 function declareWinner() {
-  if (((game.player.handTotal > dealer.handTotal) && game.player.handTotal <= 21) || dealer.handTotal > 21) {
+  if (((game.playerHand.handTotal > game.dealerHand.handTotal) && game.playerHand.handTotal <= 21) || game.dealerHand.handTotal > 21) {
     document.getElementById("winner").innerHTML = "You win!";
-    playerDollars +=  betAmount * 2;
-    document.getElementById("playermoney").innerHTML = "$" + playerDollars;
+    game.playerDollars +=  game.betAmount * 2;
+    document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
     showAllDealerCards();
-  } else if ((dealer.handTotal > game.player.handTotal) && dealer.handTotal <= 21) {
+  } else if ((game.dealerHand.handTotal > game.playerHand.handTotal) && game.dealerHand.handTotal <= 21) {
     document.getElementById("winner").innerHTML = "Dealer wins!";
     // No need to update player amount; it was already taken when it was bet
   } else {
     // alert("Push!");
     document.getElementById("winner").innerHTML = "Push!";
-    playerDollars += betAmount;
-    document.getElementById("playermoney").innerHTML = "$" + playerDollars;
+    game.playerDollars += game.betAmount;
+    document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
     showAllDealerCards();
   }
   if (doubleDown) {
-    document.getElementById("betamount").value = (betAmount / 2);
+    document.getElementById("betamount").value = (game.betAmount / 2);
   }
 }
 
