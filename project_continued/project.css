@@ -276,3 +276,34 @@ button { cursor:pointer; }
 	font-size: 110%;
 	text-align: center;
 }
+
+.totalcards {
+	position: fixed;
+	top: 800px;
+	left: 50px;
+	height: 30px;
+	width: 150px;
+	color: white;
+}
+
+.totalcards input {
+	text-align: right;
+	width: 20;
+}
+
+.cardsdealt {
+	position: fixed;
+	top: 800px;
+	left: 250px;
+	color: white;
+}
+
+td {
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	border: 1px solid #f9f2ec;
+	width: 60px;
+	text-align: center;
+}

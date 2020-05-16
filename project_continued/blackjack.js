@@ -30,7 +30,8 @@ class BlackjackGame {
     cardBack,
     newDeal = true,
     playerDollars = 0,
-    betAmount = 0)
+    betAmount = 0,
+    cardsDealt = 0)
   {
     this.turn = turn;
     this.playerHand = playerHand;
@@ -40,6 +41,7 @@ class BlackjackGame {
     this.newDeal = newDeal;
     this.playerDollars = playerDollars;
     this.betAmount = betAmount;
+    this.cardsDealt = cardsDealt;
   }
 }
 
@@ -117,6 +119,8 @@ function startGame() {
   document.getElementById("betamount").addEventListener("input", function(){
     document.getElementById("playerbetbutton").disabled = false;
   }); 
+
+  document.getElementById("totalcards").value = game.cardsDealt;
 }
 
 // Gets starting amount of money
@@ -231,7 +235,9 @@ function initialDeal() {
 function dealPlayerCard() {
   // Add the card to the player hand array
   game.playerHand.hand.push(game.gameDeck.getRandomUnusedCard());
-  // gameDeck.drawnCards++;
+  // Update the data at the bottom
+  updateCardCount(game.playerHand.hand[game.playerHand.hand.length - 1]);
+  //Updte the deck size
   document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   // add the HTML necesary to display the card to the cards array
   game.playerHand.cards.push("<img src='" + game.gameDeck.cardPath + game.playerHand.hand[game.playerHand.hand.length - 1] + "'>");
@@ -257,7 +263,8 @@ function dealPlayerCard() {
 function dealDealerCard() {
   // Add the card to the dealer hand array
   game.dealerHand.hand.push(game.gameDeck.getRandomUnusedCard());
-  // gameDeck.drawnCards++;
+  // Update the data at the bottom
+  updateCardCount(game.dealerHand.hand[game.dealerHand.hand.length - 1]);
   document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   // add the HTML necesary to display the card to the cards array
   if (game.dealerHand.hand.length == 1) {
@@ -395,6 +402,23 @@ function declareWinner() {
     document.getElementById("betamount").value = (game.betAmount / 2);
   }
 }
+
+// Updates the card count table
+function updateCardCount(card) {
+  // Update the number of cards
+  document.getElementById("totalcards").value = ++game.cardsDealt;
+  // Get the value of the card
+  var thecard = card.charAt(0) + card.charAt(1);
+  // Get the current value of the card
+  var count = parseInt(document.getElementById(thecard).innerHTML);
+  // Increment the count
+  count++;
+  // Assign the updated count to the correct cell
+  document.getElementById(thecard).innerHTML = count;
+}
+
+
+
 
 
 // Old code, not used
