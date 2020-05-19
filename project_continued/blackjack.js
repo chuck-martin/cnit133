@@ -363,6 +363,8 @@ function sleep(milliseconds) {
 // Tests if a 2-card hand is blackjack, that is, totals 11 with an ace (which is also 21 with 2 cards)
 function isBlackJack(testhand) {
   if (testhand.hand.length == 2 && testhand.handTotal == 11 & testhand.aceInHand) {
+    document.getElementById("hitme").disabled = true;
+    document.getElementById("stand").disabled = true;
     return true;
   } else {
     return false;
@@ -386,6 +388,8 @@ function insurance() {
 // Can double down when player total is 10 or 11
 function playerDoubleDown() {
   document.getElementById("doubledownbutton").style.visibility = "hidden";
+  document.getElementById("hitme").disabled = true;
+  document.getElementById("stand").disabled = true;
   game.playerHand.doubleDown = true;
   // double bet amount
   game.playerDollars -= game.betAmount;
