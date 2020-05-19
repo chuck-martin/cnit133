@@ -241,7 +241,7 @@ button { cursor: pointer; }
 	width: 100px;
 }
 
-.player img, .dealer img, .secondhand img {
+.player img, .dealer img, .playersplit img {
 	width: 100px;
 }
 
@@ -262,7 +262,7 @@ button { cursor: pointer; }
 	text-align: center;
 }
 
-.splitpairbutton {
+.splitpair {
 	visibility: hidden;
 	height: 25px;
 	width: 100px;
