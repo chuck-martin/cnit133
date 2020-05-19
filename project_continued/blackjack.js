@@ -156,7 +156,7 @@ function newGame() {
   if (parseInt(game.betAmount) == NaN) {
     alert("No number entered.");
     return;
-  } else if (parseInt(game.betAmount) < 0 || parseInt(betAmount) > game.playerDollars) {
+  } else if (parseInt(game.betAmount) < 0 || parseInt(game.betAmount) > game.playerDollars) {
     alert("Invalid amount entered");
     return;
   } else  if (parseInt(game.betAmount) == 0) {
@@ -170,7 +170,7 @@ function newGame() {
   // If more than 30 cards used, create a fresh deck
   if (game.gameDeck.deck.size < 20) {
     game.gameDeck = new DeckOfCards;
-    game.cardBack = gameDeck.cardBacks[Math.floor(Math.random() * game.gameDeck.cardBacks.length)];
+    game.cardBack = game.gameDeck.cardBacks[Math.floor(Math.random() * game.gameDeck.cardBacks.length)];
     document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
   }
   // create player & dealer instances 
@@ -190,6 +190,7 @@ function newGame() {
 // Deal 4 cards, 2 each
 function initialDeal() {
   document.getElementById("doubledownbutton").style.visibility = "hidden";
+  document.getElementById("splitpair").style.visibility = "hidden";
   // Deal 4 cards, 2 each
   for (var i = 0; i < 4; i++) {
     if (game.turn == "player") {
@@ -231,6 +232,11 @@ function initialDeal() {
   // Test for player eligible to double down
   if (game.playerHand.handTotal == 10 || game.playerHand.handTotal == 11) {
     document.getElementById("doubledownbutton").style.visibility = "visible";
+  }
+
+  // Test for player eligibility to split a pair
+  if (game.playerHand.hand[0].charAt(0) == game.playerHand.hand[1].charAt(0)) {
+    document.getElementById("splitpair").style.visibility = "visible";
   }
 
   // insurance();
@@ -361,6 +367,10 @@ function isBlackJack(testhand) {
   } else {
     return false;
   }
+}
+
+function noSplit() {
+  document.getElementById("splitpair").style.visibility = "hidden";
 }
 
 function insurance() {

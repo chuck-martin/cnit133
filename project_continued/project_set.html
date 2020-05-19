@@ -43,11 +43,14 @@
 		<input class="playerbutton" id="hitme" type="button" value="Hit me!" onclick="dealPlayerCard()"><br>
 		<input class="playerbutton" id="stand" type="button" value="Stand" onclick="dealDealerCards()"><br>
 		<input type="button" class="doubledownbutton" id="doubledownbutton" value="Double down" onclick="playerDoubleDown()">
-		<input type="button" class="splitpairbutton" id="splitpairbutton" value="Split pair">
+		<div id="splitpair" class="splitpair">
+			<p>Split pair?</p>
+			<input type="button" value="Yes"> <input type="button" value="No" onclick="noSplit()">
+		</div>
 	</div>
 
 	<div id="player" class="player"></div>
-	<div id="secondhand" class="secondhand"></div>
+	<div id="playersplit" class="playersplit"></div>
 
 	<div class="totalcards">Total number of cards dealt:<input type="text" id="totalcards"></div>
 	<div class="cardsdealt">
