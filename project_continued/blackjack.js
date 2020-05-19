@@ -300,6 +300,8 @@ function dealDealerCard() {
 
 // If we get here, player has 21 or less
 function dealDealerCards() {
+  document.getElementById("hitme").disabled = true;
+  document.getElementById("stand").disabled = true;
   // If player has ace, calculate correct hand total
   if (game.playerHand.aceInHand && game.playerHand.handTotal <= 11) {
       game.playerHand.handTotal += 10;
