@@ -385,6 +385,7 @@ function insurance() {
 
 // Can double down when player total is 10 or 11
 function playerDoubleDown() {
+  document.getElementById("doubledownbutton").style.visibility = "hidden";
   game.playerHand.doubleDown = true;
   // double bet amount
   game.playerDollars -= game.betAmount;
