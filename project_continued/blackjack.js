@@ -8,6 +8,7 @@ Spring 2019 */
 window.onload = startGame;
 
 // Set up initial variables
+/*
 var turn = "player";
 var game;
 var player;
@@ -18,6 +19,7 @@ var newDeal = true;
 var playerDollars = 0;
 var betAmount = 0;
 var doubleDown = false;
+*/
 
 // Class for game: values and other stuff
 // New game object should be instantiated every time the page loads
@@ -53,7 +55,8 @@ class BlackjackHand {
     handTotal =  0,
     aceInHand = false,
     dealerShowsAce = false,
-    sameCardRank = false)
+    sameCardRank = false,
+    doubleDown = false)
     {
       this.hand = hand;
       this.cards = cards;
@@ -61,6 +64,7 @@ class BlackjackHand {
       this.aceInHand = aceInHand;
       this.dealerShowsAce = dealerShowsAce;
       this.sameCardRank = sameCardRank;
+      this.doubleDown = doubleDown;
     }
 
   // When a card is dealt, updates the total for that hands
@@ -371,7 +375,7 @@ function insurance() {
 
 // Can double down when player total is 10 or 11
 function playerDoubleDown() {
-  doubleDown = true;
+  game.playerHand.doubleDown = true;
   // double bet amount
   game.playerDollars -= game.betAmount;
   document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
@@ -398,7 +402,7 @@ function declareWinner() {
     document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
     showAllDealerCards();
   }
-  if (doubleDown) {
+  if (game.playerHand.doubleDown) {
     document.getElementById("betamount").value = (game.betAmount / 2);
   }
 }
