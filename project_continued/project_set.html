@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h1>Blackjack</h1>
+
 	<img class="deck" id="deck" src="">
 	<div class="cardcount" id="cardcount"></div>
 	<div class="addfundstext">Enter amount to add: </div>
@@ -19,7 +20,7 @@
 	<div id="playermoney" class="playermoney"></div>
 	<div class="playerbetamounttext">Enter a bet amount: </div>
 	<input class="playerbetamount" type="number" id="betamount">
-	<button class="playerbetbutton" id="playerbetbutton" type="button" class="reset" onclick="newGame()">Place bet and deal new hand</button>
+	<button class="playerbetbutton" id="playerbetbutton" type="button" onclick="newGame()">Place bet and deal new hand</button>
 	<div class="rules">
 		<ul>
 			<li>Dealer stands on soft 17</li>
@@ -28,15 +29,6 @@
 	</div>
 	<div class="winner" id="winner"></div>
 
-	<!-- <p><img src="" id="card" width="200px"></p>
-	<p>Cards used: <span id="cardsused"></span></p> -->
-	<p>
-		<!-- <img class="drawnCard" id="drawnCard" src=""> 
-		<input type="button" class="deal" value="New Card" onclick="dealCard()"> -->
-		
-		
-		
-	</p>
 	<div class="dealerheader">Dealer: <span id="dealerheader"></span></div>
 	<div id="dealer" class="dealer"></div>
 	<div class="playerheader">Player: <span id="playerheader"></span><br>
@@ -53,8 +45,8 @@
 	<div id="playersplit" class="playersplit"></div>
 
 	<div class="totalcards">Total number of cards dealt:<input type="text" id="totalcards"></div>
-	<div class="cardsdealt">
-		<table>
+	
+		<table class="cardsdealt">
 			<tr><td>AC</td><td id="AC">0</td><td>AD</td><td id="AD">0</td><td>AH</td><td id="AH">0</td><td>AS</td><td id="AS">0</td></tr>
 			<tr><td>2C</td><td id="2C">0</td><td>2D</td><td id="2D">0</td><td>2H</td><td id="2H">0</td><td>2S</td><td id="2S">0</td></tr>
 			<tr><td>3C</td><td id="3C">0</td><td>3D</td><td id="3D">0</td><td>3H</td><td id="3H">0</td><td>3S</td><td id="3S">0</td></tr>
@@ -69,7 +61,7 @@
 			<tr><td>QC</td><td id="QC">0</td><td>QD</td><td id="QD">0</td><td>QH</td><td id="QH">0</td><td>QS</td><td id="QS">0</td></tr>
 			<tr><td>KC</td><td id="KC">0</td><td>KD</td><td id="KD">0</td><td>KH</td><td id="KH">0</td><td>KS</td><td id="KS">0</td></tr>
 		</table>
-	</div>
-
+	
+	
 </body>
 </html>

@@ -12,6 +12,8 @@ body {
 /*
 body { overflow: scroll; }
 */
+
+
 h1 {
 	color: white;
 }
@@ -19,19 +21,20 @@ h1 {
 button { cursor: pointer; }
 
 .deal {
-	position: fixed;
+	position: absolute;
 	top: 100px;
 	left: 400px;
 }
-
+/*
 .reset {
-	position: fixed;
+	position: absolute;
 	top: 100px;
 	left: 600px;
 }
+*/
 
 .deck {
-	position: fixed;
+	position: absolute;
 	top: 50px;
 	left: 50px;
 	width: 100px;
@@ -39,7 +42,7 @@ button { cursor: pointer; }
 }
 
 .cardcount {
-	position: fixed;
+	position: absolute;
 	top: 170px;
 	left: 160px;
 	height: 25px;
@@ -52,7 +55,7 @@ button { cursor: pointer; }
 }
 
 .addfundstext {
-	position: fixed;
+	position: absolute;
 	top: 80px;
 	left: 200px;
 	height: 30px;
@@ -67,7 +70,7 @@ button { cursor: pointer; }
 }
 
 .addfundsamount {
-	position: fixed;
+	position: absolute;
 	top: 80px;
 	left: 400px;
 	height: 30px;
@@ -80,7 +83,7 @@ button { cursor: pointer; }
 }
 
 .addfundsbutton {
-	position: fixed;
+	position: absolute;
 	top: 80px;
 	left: 500px;
 	height: 30px;
@@ -92,7 +95,7 @@ button { cursor: pointer; }
 }
 
 .playermoneytext {
-	position: fixed;
+	position: absolute;
 	top: 120px;
 	left: 200px;
 	height: 30px;
@@ -106,10 +109,8 @@ button { cursor: pointer; }
 	border-radius: 5px;
 }
 
-
-
 .playermoney {
-	position: fixed;
+	position: absolute;
 	top: 120px;
 	left: 425px;
 	height: 30px;
@@ -123,7 +124,7 @@ button { cursor: pointer; }
 }
 
 .playerbetamounttext {
-	position: fixed;
+	position: absolute;
 	top: 160px;
 	left: 200px;
 	height: 30px;
@@ -138,7 +139,7 @@ button { cursor: pointer; }
 }
 
 .playerbetamount {
-	position: fixed;
+	position: absolute;
 	top: 160px;
 	left: 425px;
 	height: 30px;
@@ -151,7 +152,7 @@ button { cursor: pointer; }
 }
 
 .playerbetbutton {
-	position: fixed;
+	position: absolute;
 	top: 160px;
 	left: 580px;
 	height: 30px;
@@ -163,7 +164,7 @@ button { cursor: pointer; }
 }
 
 .rules {
-	position: fixed;
+	position: absolute;
 	top: 50px;
 	left: 920px;
 	width: 320px;
@@ -175,7 +176,7 @@ button { cursor: pointer; }
 }
 
 .winner {
-	position: fixed;
+	position: absolute;
 	top: 350px;
 	left: 920px;
 	width: 320px;
@@ -190,7 +191,7 @@ button { cursor: pointer; }
 }
 
 .drawnCard {
-	position: fixed;
+	position: absolute;
 	top: 50px;
 	left: 200px;
 	width: 100px;
@@ -198,7 +199,7 @@ button { cursor: pointer; }
 }
 
 .dealerheader {
-	position: fixed;
+	position: absolute;
 	top: 220px;
 	left: 50px;
 	height: 150px;
@@ -207,7 +208,7 @@ button { cursor: pointer; }
 }
 
 .dealer {
-	position: fixed;
+	position: absolute;
 	top: 220px;
 	left: 250px;
 	height: 150px;
@@ -215,7 +216,7 @@ button { cursor: pointer; }
 }
 
 .playerheader {
-	position: fixed;
+	position: absolute;
 	top: 400px;
 	left: 50px;
 	height: 100px;
@@ -226,7 +227,7 @@ button { cursor: pointer; }
 
 
 .player {
-	position: fixed;
+	position: absolute;
 	top: 400px;
 	left: 250px;
 	height: 150px;
@@ -234,7 +235,7 @@ button { cursor: pointer; }
 }
 
 .playersplit {
-	position: fixed;
+	position: absolute;
 	top: 580px;
 	left: 250px;
 	height: 150px;
@@ -246,7 +247,7 @@ button { cursor: pointer; }
 }
 
 .playerbuttons, div.playerbuttons {
-	position: fixed;
+	position: absolute;
 	top: 750px;
 	left: 50px;
 	height: 50px;
@@ -270,7 +271,7 @@ button { cursor: pointer; }
 }
 
 .secondhand {
-	position: fixed;
+	position: absolute;
 	top: 570px;
 	left: 250px;
 	height: 150px;
@@ -278,7 +279,7 @@ button { cursor: pointer; }
 }
 
 .secondhandheader {
-	position: fixed;
+	position: absolute;
 	top: 570px;
 	left: 50px;
 	height: 100px;
@@ -296,7 +297,7 @@ button { cursor: pointer; }
 }
 
 .totalcards {
-	position: fixed;
+	position: absolute;
 	top: 800px;
 	left: 50px;
 	height: 30px;
@@ -309,8 +310,8 @@ button { cursor: pointer; }
 	width: 20;
 }
 
-.cardsdealt {
-	position: fixed;
+.cardsdealt, table.cardsdealt {
+	position: absolute;
 	top: 800px;
 	left: 250px;
 	color: white;
