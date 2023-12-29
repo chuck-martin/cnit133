@@ -27,6 +27,7 @@ class BlackjackGame {
   constructor(
     turn = "player",
     playerHand,
+    playerSplitHand,
     dealerHand,
     gameDeck,
     cardBack,
@@ -37,6 +38,7 @@ class BlackjackGame {
   {
     this.turn = turn;
     this.playerHand = playerHand;
+    this.playerSplitHand = playerSplitHand;
     this.dealerHand = dealerHand;
     this.gameDeck = gameDeck;
     this.cardBack = cardBack;
@@ -56,7 +58,8 @@ class BlackjackHand {
     aceInHand = false,
     dealerShowsAce = false,
     sameCardRank = false,
-    doubleDown = false)
+    doubleDown = false,
+    split = false)
     {
       this.hand = hand;
       this.cards = cards;
@@ -65,6 +68,7 @@ class BlackjackHand {
       this.dealerShowsAce = dealerShowsAce;
       this.sameCardRank = sameCardRank;
       this.doubleDown = doubleDown;
+      this.split = split;
     }
 
   // When a card is dealt, updates the total for that hands
