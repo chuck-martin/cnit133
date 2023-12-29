@@ -246,6 +246,11 @@ function initialDeal() {
   // insurance();
 }
 
+function dealPlayer() {
+  // Deals one or two hands depending on the value of split: false = 1 & true = 2
+
+}
+
 function dealPlayerCard() {
   // Add the card to the player hand array
   game.playerHand.hand.push(game.gameDeck.getRandomUnusedCard());
@@ -398,13 +403,26 @@ function playerDoubleDown() {
   document.getElementById("stand").disabled = true;
   game.playerHand.doubleDown = true;
   // double bet amount
+  doubleBet();
+  // deal 1 player card, then deal dealer cards
+  dealPlayerCard();
+  dealDealerCards();
+}
+
+// Can split when both dealt cards are same value. Doubles bet (one bet on each hand). This game allows one split per hand.
+function playerSplitPair() {
+  // Requires the dealing and evaluation of 2 player hands befoer the delaer hand is dealt, player can win on 0, 1, or 2 hands
+  document.getElementById("splitpair").style.visibility = "hidden";
+  game.playerHand.split = true;
+
+}
+
+// Doubles the player bet. Used for doubleing down and splitting pairs. 
+function doubleBet() {
   game.playerDollars -= game.betAmount;
   document.getElementById("playermoney").innerHTML = "$" + game.playerDollars;
   game.betAmount += game.betAmount;
   document.getElementById("betamount").value = game.betAmount;
-  // deal 1 player card, then deal dealer cards
-  dealPlayerCard();
-  dealDealerCards();
 }
 
 function declareWinner() {
