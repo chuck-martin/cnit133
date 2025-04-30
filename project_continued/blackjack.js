@@ -268,6 +268,7 @@ function dealPlayerCard() {
   }
   // Update the display of player cards
   document.getElementById("player").style.width = (game.playerHand.hand.length * 100) + "px";
+  document.getElementById("player").classList.add("activeHand")
   document.getElementById("player").innerHTML += game.playerHand.cards[game.playerHand.cards.length - 1];
   if (game.playerHand.handTotal > 21) {
     document.getElementById("dealerheader").style.visibility = "visible";

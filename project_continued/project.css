@@ -326,3 +326,7 @@ td {
 	width: 60px;
 	text-align: center;
 }
+
+.activeHand {
+	border: 4px dashed #0f0;
+}
