@@ -415,6 +415,7 @@ function playerSplitPair() {
   // Requires the dealing and evaluation of 2 player hands befoer the delaer hand is dealt, player can win on 0, 1, or 2 hands
   document.getElementById("splitpair").style.visibility = "hidden";
   game.playerHand.split = true;
+  game.playerSplitHand = new BlackjackHand;
 
 }
 
