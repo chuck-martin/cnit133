@@ -67,6 +67,46 @@ button { cursor: pointer; }
 	border-radius: 10px;
 }
 
+.numdeckstext {
+	position: absolute;
+	top: 40px;
+	left: 200px;
+	height: 30px;
+	width: 160px;
+	border: 0.5px solid #060;
+	text-align: right;
+	vertical-align: bottom;
+	line-height: 1.8;
+	font-size: 100%;
+	color: white;
+	border-radius: 5px;
+}
+
+.numdecks {
+	position: absolute;
+	top: 40px;
+	left: 380px;
+	height: 30px;
+	width: 80px;
+	border: 0.5px solid #060;
+	text-align: right;
+	font-size: 110%;
+	border-radius: 5px;
+	padding-right: 5px;
+}
+
+.numdecksbutton {
+	position: absolute;
+	top: 40px;
+	left: 480px;
+	height: 30px;
+	width: 60px;
+	border: 0.5px solid #060;
+	text-align: center;
+	font-size: 120%;
+	border-radius: 5px;
+}
+
 .addfundstext {
 	position: absolute;
 	top: 80px;
@@ -178,7 +218,7 @@ button { cursor: pointer; }
 
 .rules {
 	position: absolute;
-	top: 50px;
+	top: 100px;
 	left: 920px;
 	width: 320px;
 	height: 100px;
