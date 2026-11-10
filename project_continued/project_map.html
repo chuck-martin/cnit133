@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="../cnit133.css">
 	<link rel="stylesheet" href="project.css">
 	<script src="cards_map.js"></script>
-	<script src="blackjack.js"></script>
+	<script src="blackjack_map.js"></script>
 </head>
 <body>
 	<h1>Blackjack</h1>
@@ -15,8 +15,8 @@
 	<div class="deckcount" id="deckcount"></div>
 	<div class="cardcount" id="cardcount"></div>
 	<div class="numdeckstext" id="numdeckstext">Number of decks:</div>
-	<input class="numdecks" type="number" min="1" max="6" id="numdecks">
-	<button class="numdecksbutton" id="numdecksbutton" type="button">Select</button>
+	<input class="numdecks" type="number" min="1" max="6" value="1" step="1" id="numdecks">
+	<button class="numdecksbutton" id="numdecksbutton" type="button" onclick="numberOfDecks()">Select</button>
 	<div class="addfundstext">Enter amount to add: </div>
 	<input class="addfundsamount" type="number" id="addfundsamount">
 	<button class="addfundsbutton" id="addfundsbutton" type="button" onclick="addFunds()">Add</button>
