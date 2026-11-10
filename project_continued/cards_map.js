@@ -15,10 +15,12 @@ class DeckOfCards {
     cardBacks = ["blue_back.png", "gray_back.png", "green_back.png",
       "purple_back.png", "red_back.png", "yellow_back.png"],
     cardPath = "images/cards/",
+    numCards = 52,
     numDecks = 1)
   {
     this.cardBacks = cardBacks;
     this.cardPath = cardPath;
+    this.numCards = numCards
     this.numDecks = numDecks;
 
     // Map of card name -> number of times drawn since the last shuffle

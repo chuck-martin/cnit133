@@ -148,8 +148,8 @@ function getBankroll() {
 
 // Selects number of decks, from 1 to 6
 function numberOfDecks(){
-    var numDecks = document.getElementById("numdecks").value
-    document.getElementById("deckcount").innerHTML = numDecks
+    game.numDecks = document.getElementById("numdecks").value
+    document.getElementById("deckcount").innerHTML = game.numDecks
 }
 
 // Add funds to bankroll
