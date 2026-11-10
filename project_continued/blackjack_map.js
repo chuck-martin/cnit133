@@ -264,6 +264,7 @@ function dealPlayer() {
 function dealPlayerCard() {
   // Add the card to the player hand array
   game.playerHand.hand.push(game.gameDeck.getRandomUnusedCard());
+  document.getElementById("cardcount").value -= 1
   // Update the data at the bottom
   updateCardCount(game.playerHand.hand[game.playerHand.hand.length - 1]);
   //Updte the deck size
@@ -293,6 +294,7 @@ function dealPlayerCard() {
 function dealDealerCard() {
   // Add the card to the dealer hand array
   game.dealerHand.hand.push(game.gameDeck.getRandomUnusedCard());
+  document.getElementById("cardcount").value -= 1
   // Update the data at the bottom
   updateCardCount(game.dealerHand.hand[game.dealerHand.hand.length - 1]);
   document.getElementById("cardcount").innerHTML = game.gameDeck.deck.size;
