@@ -149,6 +149,7 @@ function getBankroll() {
 // Selects number of decks, from 1 to 6
 function numberOfDecks(){
     var numDecks = parseInt(document.getElementById("numdecks").innerHTML)
+    alert(numDecks + " is " + typeof numDecks)
     document.getElementById("deckcount").innerHTML = numDecks
 }
 
