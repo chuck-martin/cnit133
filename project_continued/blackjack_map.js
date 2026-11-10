@@ -148,9 +148,7 @@ function getBankroll() {
 
 // Selects number of decks, from 1 to 6
 function numberOfDecks(){
-    alert(document.getElementById("numdecks").value)
     var numDecks = document.getElementById("numdecks").value
-    alert(numDecks + " is " + typeof numDecks)
     document.getElementById("deckcount").innerHTML = numDecks
 }
 
@@ -164,6 +162,9 @@ function addFunds() {
 }
 
 function newGame() {
+  // Disable number of decks fields
+  document.getElementById("numdecks").disabled = true
+  document.getElementById("numdecksbutton").disabled = true
   // Get bet amount
   game.betAmount = parseInt(document.getElementById("betamount").value);
   if (parseInt(game.betAmount) == NaN) {
