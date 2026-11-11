@@ -103,6 +103,36 @@ class BlackjackHand {
         this.aceInHand = true;
     }
   }
+
+  // When a card is dealt, updates the running total 
+  updateCount() {
+    switch(this.hand[this.hand.length - 1].charAt(0)) {
+      // number cards that increase the count
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+        this.runningCount += 1;
+        break;
+      // number cards that do not change the count
+      case "7":
+      case "8":
+      case "9":
+        this.runningCount += 0;
+        break;
+      // 10 and face cards decrease the count
+      case "T":
+      case "J":
+      case "Q":
+      case "K":
+        this.runningCount -= 1;
+        break;
+      // Its an ace (also decreases the count)
+      default:
+        this.runningCount -= 1;
+    }
+  }
 }
 
 // Runs when page loads
