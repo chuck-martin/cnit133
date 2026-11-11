@@ -34,7 +34,9 @@ class BlackjackGame {
     newDeal = true,
     playerDollars = 0,
     betAmount = 0,
-    cardsDealt = 0)
+    cardsDealt = 0,
+    runningCount = 0,
+    trueCount = 0)
   {
     this.turn = turn;
     this.playerHand = playerHand;
@@ -46,6 +48,8 @@ class BlackjackGame {
     this.playerDollars = playerDollars;
     this.betAmount = betAmount;
     this.cardsDealt = cardsDealt;
+    this.runningCount = runningCount;
+    this.trueCount = trueCount:
   }
 }
 
