@@ -289,9 +289,9 @@ button { cursor: pointer; }
 
 .counttext {
 	position: absolute;
-	top: 300px;
+	top: 310px;
 	left: 920px;
-	height: 40px;
+	height: 30px;
 	width: 200px;
 	border: 0.5px solid #060;
 	text-align: right;
@@ -305,10 +305,10 @@ button { cursor: pointer; }
 
 .countval {
 	position: absolute;
-	top: 300px;
-	left: 1160px;
+	top: 310px;
+	left: 1140px;
 	height: 40px;
-	width: 60px;
+	width: 80px;
 	color: #060;
 	background-color: #e6ffe6;
 	font-size: 150%;
