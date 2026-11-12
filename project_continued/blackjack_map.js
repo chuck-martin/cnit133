@@ -132,6 +132,7 @@ class BlackjackHand {
       default:
         this.runningCount -= 1;
     }
+    document.getElementById("countVal").innerHTML = runningCount + ", " + (runningCount / this.numDecks).toFixed(2)
   }
 }
 
@@ -300,6 +301,7 @@ function dealPlayerCard() {
   game.playerHand.hand.push(game.gameDeck.getRandomUnusedCard());
   // Update the data at the bottom
   updateCardCount(game.playerHand.hand[game.playerHand.hand.length - 1]);
+  updateCount();
   //Updte the deck size
   document.getElementById("cardcount").innerHTML = game.gameDeck.size * game.gameDeck.numDecks;
   // add the HTML necesary to display the card to the cards array
@@ -329,6 +331,7 @@ function dealDealerCard() {
   game.dealerHand.hand.push(game.gameDeck.getRandomUnusedCard());
     // Update the data at the bottom
   updateCardCount(game.dealerHand.hand[game.dealerHand.hand.length - 1]);
+  updateCount();
   document.getElementById("cardcount").innerHTML = game.gameDeck.size * game.gameDeck.numDecks;
   // add the HTML necesary to display the card to the cards array
   if (game.dealerHand.hand.length == 1) {
@@ -505,8 +508,6 @@ function updateCardCount(card) {
   // Assign the updated count to the correct cell
   document.getElementById(thecard).innerHTML = count;
 }
-
-
 
 
 
